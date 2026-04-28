@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="salmon_primary">#FF8B6A</color>
+    <color name="salmon_secondary">#FFA07A</color>
+    <color name="indicator_inactive">#EEEEEE</color>
+    <color name="text_secondary">#757575</color>
 </resources>
