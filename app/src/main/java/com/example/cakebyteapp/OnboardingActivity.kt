@@ -36,17 +36,27 @@ class OnboardingActivity : AppCompatActivity() {
             )
         )
 
-        binding.viewPager.adapter = OnboardingAdapter(onboardingItems) {
+        binding.viewPager.adapter = OnboardingAdapter(onboardingItems, {
             // Acción al hacer clic en "Empieza a comprar"
-            // Por ejemplo: ir al Login o Home
-        }
+        }, { direction ->
+            // direction: -1 para atrás, 1 para adelante
+            val currentItem = binding.viewPager.currentItem
+            val nextItem = currentItem + direction
+            if (nextItem in 0 until onboardingItems.size) {
+                binding.viewPager.setCurrentItem(nextItem, false)
+            }
+        })
+
+        // Deshabilitar el deslizamiento manual (swipe)
+        binding.viewPager.isUserInputEnabled = false
     }
 
     data class OnboardingItem(val image: Int, val title: String, val description: String)
 
     class OnboardingAdapter(
         private val items: List<OnboardingItem>,
-        private val onStartClick: () -> Unit
+        private val onStartClick: () -> Unit,
+        private val onNavigate: (Int) -> Unit
     ) : RecyclerView.Adapter<OnboardingAdapter.OnboardingViewHolder>() {
 
         inner class OnboardingViewHolder(val binding: ItemOnboardingBinding) :
@@ -67,9 +77,32 @@ class OnboardingActivity : AppCompatActivity() {
             holder.binding.tvTitle.text = item.title
             holder.binding.tvDescription.text = item.description
 
+            // Detectar toque en la mitad izquierda o derecha
+            holder.binding.root.setOnClickListener { view ->
+                // No navegamos si se toca el botón (el botón tiene su propio listener)
+                // Pero como el root es el padre, necesitamos verificar la posición
+            }
+            
+            // Usaremos un touch listener para mayor precisión
+            holder.binding.root.setOnTouchListener { v, event ->
+                if (event.action == android.view.MotionEvent.ACTION_UP) {
+                    val width = v.width
+                    val x = event.x
+                    if (x < width / 2) {
+                        onNavigate(-1) // Izquierda -> Atrás
+                    } else {
+                        onNavigate(1)  // Derecha -> Adelante
+                    }
+                    v.performClick()
+                }
+                true
+            }
+
             // Mostrar botón solo en la última pantalla
             if (position == items.size - 1) {
                 holder.binding.btnStart.visibility = View.VISIBLE
+                // IMPORTANTE: El botón debe estar encima para recibir el clic
+                holder.binding.btnStart.setOnTouchListener { _, _ -> false } // Dejar que el botón maneje su toque
                 holder.binding.btnStart.setOnClickListener { onStartClick() }
             } else {
                 holder.binding.btnStart.visibility = View.GONE
