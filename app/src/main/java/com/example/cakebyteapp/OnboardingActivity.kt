@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cakebyteapp.databinding.ActivityOnboardingBinding
 import com.example.cakebyteapp.databinding.ItemOnboardingBinding
@@ -15,6 +16,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,6 +40,9 @@ class OnboardingActivity : AppCompatActivity() {
 
         binding.viewPager.adapter = OnboardingAdapter(onboardingItems, {
             // Acción al hacer clic en "Empieza a comprar"
+            val intent = android.content.Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }, { direction ->
             // direction: -1 para atrás, 1 para adelante
             val currentItem = binding.viewPager.currentItem
