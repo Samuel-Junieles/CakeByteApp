@@ -70,16 +70,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilEmail" />
 
-    <TextView
-        android:id="@+id/tvForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
-        android:textColor="@color/salmon_primary"
-        app:layout_constraintBottom_toBottomOf="@id/tvPasswordLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvPasswordLabel" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -100,6 +90,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/salmon_primary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword" />
+
+    <TextView
         android:id="@+id/tvErrorPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,18 +113,7 @@
         app:drawableStartCompat="@android:drawable/stat_notify_error"
         app:drawableTint="#F44336"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tilPassword" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/cbKeepSignedIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/keep_me_signed_in"
-        android:textColor="@color/black"
-        app:buttonTint="@color/salmon_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvErrorPassword" />
+        app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
@@ -137,7 +127,7 @@
         app:cornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbKeepSignedIn" />
+        app:layout_constraintTop_toBottomOf="@id/tvErrorPassword" />
 
     <LinearLayout
         android:id="@+id/llSeparator"
@@ -193,7 +183,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/dont_have_account"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/salmon_primary"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
