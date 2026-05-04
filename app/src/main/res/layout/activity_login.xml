@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -13,7 +14,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/logoFondo"
+        android:src="@drawable/logo_fondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,21 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGoogleSignIn"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:padding="12dp"
-        android:text="@string/google_sign_in"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLoginTitle"
-        app:strokeColor="#E0E0E0" />
-
     <TextView
         android:id="@+id/tvEmailLabel"
         android:layout_width="wrap_content"
@@ -54,7 +40,7 @@
         android:text="@string/email_label"
         android:textColor="@color/text_secondary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnGoogleSignIn" />
+        app:layout_constraintTop_toBottomOf="@id/tvLoginTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
@@ -128,6 +114,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbKeepSignedIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/keep_me_signed_in"
+        android:textColor="@color/black"
+        app:buttonTint="@color/salmon_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvErrorPassword" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/salmon_primary"
+        android:padding="12dp"
+        android:text="@string/login_button"
+        android:textAllCaps="false"
+        app:cornerRadius="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbKeepSignedIn" />
+
     <LinearLayout
         android:id="@+id/llSeparator"
         android:layout_width="0dp"
@@ -137,7 +148,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvErrorPassword">
+        app:layout_constraintTop_toBottomOf="@id/btnLogin">
 
         <View
             android:layout_width="0dp"
@@ -160,29 +171,33 @@
             android:background="#E0E0E0" />
     </LinearLayout>
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/cbKeepSignedIn"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGoogleSignIn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:text="@string/google_sign_in"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llSeparator"
+        app:strokeColor="#E0E0E0" />
+
+    <TextView
+        android:id="@+id/tvGoToRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/keep_me_signed_in"
-        android:textColor="@color/black"
-        app:buttonTint="@color/salmon_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llSeparator" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/salmon_primary"
-        android:padding="12dp"
-        android:text="@string/login_button"
-        android:textAllCaps="false"
-        app:cornerRadius="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/dont_have_account"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbKeepSignedIn" />
+        app:layout_constraintTop_toBottomOf="@id/btnGoogleSignIn"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

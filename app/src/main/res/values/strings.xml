@@ -12,14 +12,28 @@
 
     <!-- Login -->
     <string name="login_title">Iniciar Sesión</string>
-    <string name="google_sign_in">Sign in with Google</string>
-    <string name="email_label">Email Address</string>
-    <string name="email_hint">Rhebhek@gmail.com</string>
-    <string name="password_label">Password</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="google_sign_in">Iniciar sesión con Google</string>
+    <string name="email_label">Correo electrónico</string>
+    <string name="email_hint">usuario@gmail.com</string>
+    <string name="password_label">Contraseña</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="password_hint">********</string>
-    <string name="error_password">Please enter correct password</string>
-    <string name="or_sign_in_with">or sign in with</string>
-    <string name="keep_me_signed_in">Keep me signed in</string>
-    <string name="login_button">Login</string>
+    <string name="error_password">Por favor ingresa la contraseña correcta</string>
+    <string name="or_sign_in_with">o inicia sesión con</string>
+    <string name="keep_me_signed_in">Mantenerme conectado</string>
+    <string name="login_button">Ingresar</string>
+
+    <!-- Register -->
+    <string name="register_title">Registrarse</string>
+    <string name="google_sign_up">Registrarse con Google</string>
+    <string name="or_sign_up_with">o regístrate con</string>
+    <string name="full_name_label">Nombre completo</string>
+    <string name="full_name_hint">Becca Ade</string>
+    <string name="confirm_password_label">Confirmar contraseña</string>
+    <string name="terms_and_privacy">Al crear una cuenta, acepto los Términos de Uso y la Política de Privacidad</string>
+    <string name="signup_button">Registrarse</string>
+
+    <!-- Navigation -->
+    <string name="dont_have_account">¿No tienes una cuenta? Regístrate</string>
+    <string name="already_have_account">¿Ya tienes una cuenta? Inicia sesión</string>
 </resources>
