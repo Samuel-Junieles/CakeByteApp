@@ -23,8 +23,6 @@ class RegisterActivity : AppCompatActivity() {
             // Lógica de registro
         }
 
-        binding.btnGoogleSignUp.setOnClickListener {
-            // Lógica de registro con Google
-        }
+
     }
 }

@@ -33,9 +33,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnGoogleSignIn.setOnClickListener {
-            // Lógica de inicio de sesión con Google
-        }
 
         binding.tvForgotPassword.setOnClickListener {
             // Lógica de recuperar contraseña
