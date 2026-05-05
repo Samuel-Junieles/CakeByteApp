@@ -6,4 +6,14 @@
     <color name="salmon_secondary">#FFA07A</color>
     <color name="indicator_inactive">#EEEEEE</color>
     <color name="text_secondary">#757575</color>
+    <color name="card_sales_bg">#FFF8E1</color>
+    <color name="card_orders_bg">#E8F5E9</color>
+    <color name="card_total_bg">#FCE4EC</color>
+    <color name="percentage_red">#FFCDD2</color>
+    <color name="percentage_green">#C8E6C9</color>
+    <color name="text_red">#D32F2F</color>
+    <color name="text_green">#388E3C</color>
+    <color name="icon_orange">#FFA000</color>
+    <color name="icon_green">#43A047</color>
+    <color name="icon_purple">#8E24AA</color>
 </resources>

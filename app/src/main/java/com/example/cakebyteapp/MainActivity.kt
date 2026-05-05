@@ -2,37 +2,65 @@ package com.example.cakebyteapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.cakebyteapp.databinding.ActivityMainBinding
+import com.example.cakebyteapp.domain.usecase.AuthUseCase
+import com.example.cakebyteapp.presentation.auth.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        enableEdgeToEdge()
+        // Eliminamos setDefaultNightMode de aquí
+        // Comentamos esto temporalmente para evitar el crash en MIUI/Xiaomi
+        // enableEdgeToEdge()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        // ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+        //    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        //    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+        //    insets
+        // }
 
-        // Navegar a Onboarding después de 2 segundos
-        Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, OnboardingActivity::class.java))
-            finish()
-        }, 2000)
+        observeDestination()
+        
+        lifecycleScope.launch {
+            delay(2000) // Simular splash
+            viewModel.checkSession()
+        }
+    }
+
+    private fun observeDestination() {
+        lifecycleScope.launch {
+            viewModel.destination.collect { destination ->
+                when (destination) {
+                    is AuthUseCase.Destination.Login -> {
+                        startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
+                    }
+                    is AuthUseCase.Destination.AdminDashboard -> {
+                        startActivity(Intent(this@MainActivity, AdminDashboardActivity::class.java))
+                    }
+                    else -> {
+                        // Navegar a otros dashboards según el rol
+                    }
+                }
+                finish()
+            }
+        }
     }
 }

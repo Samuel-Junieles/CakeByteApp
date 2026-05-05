@@ -36,4 +36,15 @@
     <!-- Navigation -->
     <string name="dont_have_account">¿No tienes una cuenta? Regístrate</string>
     <string name="already_have_account">¿Ya tienes una cuenta? Inicia sesión</string>
+    <string name="select_role">Selecciona tu rol:</string>
+
+    <!-- Admin Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="ventas_hoy">Ventas Hoy</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="total_sales">Total Sales</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_users">Usuarios</string>
+    <string name="nav_products">Productos</string>
+    <string name="nav_reports">Reportes</string>
 </resources>
