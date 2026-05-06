@@ -53,7 +53,8 @@ class AdminDashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_users -> {
-                    // Ir a usuarios
+                    val intent = Intent(this, com.example.cakebyteapp.presentation.admin.AdminUsersActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.navigation_products -> {

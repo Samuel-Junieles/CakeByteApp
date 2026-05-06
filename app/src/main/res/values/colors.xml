@@ -16,4 +16,13 @@
     <color name="icon_orange">#FFA000</color>
     <color name="icon_green">#43A047</color>
     <color name="icon_purple">#8E24AA</color>
+
+    <!-- Admin User Management -->
+    <color name="search_bg">#FFCCBC</color>
+    <color name="chip_all_bg">#FFEBEE</color>
+    <color name="chip_admin_bg">#E8F5E9</color>
+    <color name="chip_vendor_bg">#F5F5F5</color>
+    <color name="role_admin_text">#2E7D32</color>
+    <color name="role_vendor_text">#616161</color>
+    <color name="input_bg">#FEE7E0</color>
 </resources>

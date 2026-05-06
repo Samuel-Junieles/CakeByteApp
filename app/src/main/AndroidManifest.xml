@@ -34,6 +34,12 @@
         <activity
             android:name=".AdminDashboardActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.admin.AdminUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.admin.CreateUserActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -47,4 +47,25 @@
     <string name="nav_users">Usuarios</string>
     <string name="nav_products">Productos</string>
     <string name="nav_reports">Reportes</string>
+    <!-- Admin Users -->
+    <string name="title_users">Usuarios</string>
+    <string name="search_user_hint">Buscar Usuario</string>
+    <string name="filter_all">Todos</string>
+    <string name="filter_admin">Admin</string>
+    <string name="filter_vendor">Vendedor</string>
+    <string name="btn_create_user">Crear Usuario</string>
+
+    <!-- Create User -->
+    <string name="title_create_user">Crear Usuario</string>
+    <string name="label_name">Nombre</string>
+    <string name="hint_name">Juan</string>
+    <string name="label_surname">Apellido</string>
+    <string name="hint_surname">Flores</string>
+    <string name="label_email">Correo</string>
+    <string name="hint_email">email@dominio.com</string>
+    <string name="label_phone">Telefono</string>
+    <string name="hint_phone">+57 3044764338</string>
+    <string name="label_role">Rol</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_save">Guardar</string>
 </resources>
