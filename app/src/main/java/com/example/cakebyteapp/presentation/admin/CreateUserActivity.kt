@@ -1,5 +1,6 @@
 package com.example.cakebyteapp.presentation.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -63,6 +64,12 @@ class CreateUserActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_dashboard -> {
+                    startActivity(Intent(this, com.example.cakebyteapp.AdminDashboardActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.navigation_products -> {
+                    startActivity(Intent(this, AdminProductsActivity::class.java))
                     finish()
                     true
                 }

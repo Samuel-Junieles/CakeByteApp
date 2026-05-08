@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.example.cakebyteapp.data.local.AppDatabase
 import com.example.cakebyteapp.data.local.dao.AuthDao
+import com.example.cakebyteapp.data.local.dao.ProductDao
 import com.example.cakebyteapp.data.repository.AuthRepositoryImpl
+import com.example.cakebyteapp.data.repository.ProductRepositoryImpl
 import com.example.cakebyteapp.domain.repository.AuthRepository
+import com.example.cakebyteapp.domain.repository.ProductRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,8 +57,19 @@ object AppModule {
     }
 
     @Provides
+    fun provideProductDao(db: AppDatabase): ProductDao {
+        return db.productDao()
+    }
+
+    @Provides
     @Singleton
     fun provideAuthRepository(authDao: AuthDao, supabaseClient: SupabaseClient): AuthRepository {
         return AuthRepositoryImpl(authDao, supabaseClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductRepository(productDao: ProductDao): ProductRepository {
+        return ProductRepositoryImpl(productDao)
     }
 }

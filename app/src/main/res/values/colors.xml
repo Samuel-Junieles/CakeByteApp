@@ -25,4 +25,8 @@
     <color name="role_admin_text">#2E7D32</color>
     <color name="role_vendor_text">#616161</color>
     <color name="input_bg">#FEE7E0</color>
+
+    <!-- Admin Product Management -->
+    <color name="chip_active_bg">#C8E6C9</color>
+    <color name="chip_suspended_bg">#FFCDD2</color>
 </resources>

@@ -68,4 +68,14 @@
     <string name="label_role">Rol</string>
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_save">Guardar</string>
+
+    <!-- Admin Products -->
+    <string name="title_admin_products">Gestión de productos</string>
+    <string name="hint_search_food">Buscar Alimento</string>
+    <string name="filter_active">Activo</string>
+    <string name="filter_suspended">Suspendido</string>
+    <string name="btn_add_product">Agregar Producto</string>
+    <string name="label_stock_info">$%1$.2f · Stock: %2$d</string>
+    <string name="status_active">Activa</string>
+    <string name="status_suspended">Suspendido</string>
 </resources>

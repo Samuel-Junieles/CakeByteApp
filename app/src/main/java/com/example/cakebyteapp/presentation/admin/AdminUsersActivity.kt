@@ -65,10 +65,16 @@ class AdminUsersActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
+                    startActivity(Intent(this, com.example.cakebyteapp.AdminDashboardActivity::class.java))
                     finish()
                     true
                 }
                 R.id.navigation_users -> true
+                R.id.navigation_products -> {
+                    startActivity(Intent(this, AdminProductsActivity::class.java))
+                    finish()
+                    true
+                }
                 else -> false
             }
         }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.admin.AdminUsersActivity">
+    tools:context=".presentation.admin.AdminProductsActivity">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
-        android:text="@string/title_users"
+        android:text="@string/title_admin_products"
         android:textColor="@color/black"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_user_hint"
+            android:hint="@string/hint_search_food"
             android:inputType="text"
             android:paddingVertical="12dp"
             android:textColor="@color/black" />
@@ -63,41 +63,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter_all"
+            android:textAlignment="center"
             app:chipBackgroundColor="@color/chip_all_bg"
             app:chipStrokeWidth="0dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipAdmin"
+            android:id="@+id/chipActive"
             style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/filter_admin"
-            app:chipBackgroundColor="@color/chip_admin_bg"
+            android:text="@string/filter_active"
+            android:textAlignment="center"
+            app:chipBackgroundColor="@color/chip_active_bg"
             app:chipStrokeWidth="0dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipVendor"
+            android:id="@+id/chipSuspended"
             style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/filter_vendor"
-            app:chipBackgroundColor="@color/chip_vendor_bg"
+            android:text="@string/filter_suspended"
+            android:textAlignment="center"
+            app:chipBackgroundColor="@color/chip_suspended_bg"
             app:chipStrokeWidth="0dp" />
 
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUsers"
+        android:id="@+id/rvProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:clipToPadding="false"
-        android:paddingBottom="100dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/cgFilters"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="62dp"
-        tools:listitem="@layout/item_user" />
+        tools:layout_editor_absoluteX="-16dp"
+        tools:listitem="@layout/item_product" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -108,23 +109,5 @@
         app:itemTextColor="@color/salmon_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/admin_bottom_menu" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCreateUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/salmon_primary"
-        android:paddingHorizontal="24dp"
-        android:elevation="12dp"
-        android:translationZ="12dp"
-        android:text="@string/btn_create_user"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:cornerRadius="24dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

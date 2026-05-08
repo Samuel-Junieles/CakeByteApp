@@ -58,7 +58,7 @@ class AdminDashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_products -> {
-                    // Ir a productos
+                    startActivity(Intent(this, com.example.cakebyteapp.presentation.admin.AdminProductsActivity::class.java))
                     true
                 }
                 R.id.navigation_reports -> {

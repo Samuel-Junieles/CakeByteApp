@@ -43,6 +43,9 @@
         <activity
             android:name=".presentation.admin.CreateUserActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.admin.AdminProductsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
