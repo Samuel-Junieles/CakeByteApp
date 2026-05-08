@@ -70,7 +70,7 @@ class AdminUsersActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-                    overridePendingTransition(0, 0)
+
                     true
                 }
                 R.id.navigation_users -> true
@@ -79,7 +79,7 @@ class AdminUsersActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-                    overridePendingTransition(0, 0)
+
                     true
                 }
                 R.id.navigation_reports -> {
@@ -87,7 +87,7 @@ class AdminUsersActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-                    overridePendingTransition(0, 0)
+
                     true
                 }
                 else -> false
