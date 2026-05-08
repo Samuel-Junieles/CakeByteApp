@@ -12,7 +12,6 @@
 
     <!-- Login -->
     <string name="login_title">Iniciar Sesión</string>
-    <string name="google_sign_in">Iniciar sesión con Google</string>
     <string name="email_label">Correo electrónico</string>
     <string name="email_hint">usuario@gmail.com</string>
     <string name="password_label">Contraseña</string>
@@ -25,7 +24,7 @@
 
     <!-- Register -->
     <string name="register_title">Registrarse</string>
-    <string name="google_sign_up">Registrarse con Google</string>
+
     <string name="or_sign_up_with">o regístrate con</string>
     <string name="full_name_label">Nombre completo</string>
     <string name="full_name_hint">Becca Ade</string>
@@ -78,4 +77,15 @@
     <string name="label_stock_info">$%1$.2f · Stock: %2$d</string>
     <string name="status_active">Activa</string>
     <string name="status_suspended">Suspendido</string>
+
+    <!-- Admin Reports -->
+    <string name="title_admin_reports">Reporte de ventas</string>
+    <string name="filter_day">Hoy</string>
+    <string name="filter_week">Semana</string>
+    <string name="filter_month">Mes</string>
+    <string name="filter_year">Año</string>
+    <string name="label_total_income">Total ingresos</string>
+    <string name="label_completed_orders">Pedidos Completados</string>
+    <string name="label_top_products">Top 3 productos</string>
+    <string name="label_details">Detalles</string>
 </resources>

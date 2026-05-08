@@ -8,7 +8,7 @@ import dagger.hilt.android.HiltAndroidApp
 class CakeByteApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        // Forzamos el modo claro una sola vez a nivel de aplicación
+        // Forzamos el modo claro
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

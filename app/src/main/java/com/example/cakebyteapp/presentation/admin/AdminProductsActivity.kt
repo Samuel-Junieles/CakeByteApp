@@ -63,16 +63,30 @@ class AdminProductsActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    startActivity(Intent(this, AdminDashboardActivity::class.java))
+                    val intent = Intent(this, AdminDashboardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> {
-                    startActivity(Intent(this, AdminUsersActivity::class.java))
+                    val intent = Intent(this, AdminUsersActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> true
+                R.id.navigation_reports -> {
+                    val intent = Intent(this, AdminReportsActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    finish()
+                    overridePendingTransition(0, 0)
+                    true
+                }
                 else -> false
             }
         }

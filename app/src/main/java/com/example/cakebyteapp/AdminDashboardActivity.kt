@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.cakebyteapp.databinding.ActivityAdminDashboardBinding
+import com.example.cakebyteapp.presentation.admin.AdminReportsActivity
 import com.example.cakebyteapp.presentation.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -54,15 +55,23 @@ class AdminDashboardActivity : AppCompatActivity() {
                 }
                 R.id.navigation_users -> {
                     val intent = Intent(this, com.example.cakebyteapp.presentation.admin.AdminUsersActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> {
-                    startActivity(Intent(this, com.example.cakebyteapp.presentation.admin.AdminProductsActivity::class.java))
+                    val intent = Intent(this, com.example.cakebyteapp.presentation.admin.AdminProductsActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_reports -> {
-                    // Ir a reportes
+                    val intent = Intent(this, AdminReportsActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.cakebyteapp.AdminDashboardActivity
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityCreateUserBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,12 +65,17 @@ class CreateUserActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_dashboard -> {
-                    startActivity(Intent(this, com.example.cakebyteapp.AdminDashboardActivity::class.java))
+                    startActivity(Intent(this, AdminDashboardActivity::class.java))
                     finish()
                     true
                 }
                 R.id.navigation_products -> {
                     startActivity(Intent(this, AdminProductsActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.navigation_reports -> {
+                    startActivity(Intent(this, AdminReportsActivity::class.java))
                     finish()
                     true
                 }

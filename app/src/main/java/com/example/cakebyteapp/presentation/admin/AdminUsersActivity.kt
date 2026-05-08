@@ -3,6 +3,7 @@ package com.example.cakebyteapp.presentation.admin
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.example.cakebyteapp.AdminDashboardActivity
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -65,14 +66,28 @@ class AdminUsersActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    startActivity(Intent(this, com.example.cakebyteapp.AdminDashboardActivity::class.java))
+                    val intent = Intent(this, AdminDashboardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> true
                 R.id.navigation_products -> {
-                    startActivity(Intent(this, AdminProductsActivity::class.java))
+                    val intent = Intent(this, AdminProductsActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.navigation_reports -> {
+                    val intent = Intent(this, AdminReportsActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false
