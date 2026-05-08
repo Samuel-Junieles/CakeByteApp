@@ -11,11 +11,30 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.postgrest.Postgrest
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    private const val SUPABASE_URL = "https://memoeqamvxzlxmxxxnkt.supabase.co"
+    private const val SUPABASE_ANON_KEY = "sb_publishable_3ThJXD3rkfblpR6KYTnVXg_HhjpJucj"
+
+    @Provides
+    @Singleton
+    fun provideSupabaseClient(): SupabaseClient {
+        return createSupabaseClient(
+            supabaseUrl = SUPABASE_URL,
+            supabaseKey = SUPABASE_ANON_KEY
+        ) {
+            install(Auth)
+            install(Postgrest)
+        }
+    }
 
     @Provides
     @Singleton
@@ -25,7 +44,7 @@ object AppModule {
             AppDatabase::class.java,
             "cakebyte_db"
         )
-        .fallbackToDestructiveMigration() // Evita crashes por cambios de versión
+        .fallbackToDestructiveMigration()
         .build()
     }
 
@@ -36,7 +55,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(authDao: AuthDao): AuthRepository {
-        return AuthRepositoryImpl(authDao)
+    fun provideAuthRepository(authDao: AuthDao, supabaseClient: SupabaseClient): AuthRepository {
+        return AuthRepositoryImpl(authDao, supabaseClient)
     }
 }

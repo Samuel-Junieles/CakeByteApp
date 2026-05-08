@@ -54,9 +54,6 @@ class CreateUserActivity : AppCompatActivity() {
             finish()
         }
 
-        // Importante: Primero establecemos el ID seleccionado y LUEGO el listener.
-        // Si se hace al revés, el listener se dispara durante la inicialización
-        // y ejecuta el finish() inmediatamente, cerrando la pantalla nada más abrirse.
         binding.bottomNavigation.selectedItemId = R.id.navigation_users
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {

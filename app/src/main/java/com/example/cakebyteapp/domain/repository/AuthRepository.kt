@@ -8,4 +8,5 @@ interface AuthRepository {
     suspend fun register(email: String, pass: String, name: String, role: String): Result<Unit>
     suspend fun logout(): Result<Unit>
     fun getCurrentUser(): Flow<UserEntity?>
+    fun getAllUsers(): Flow<List<UserEntity>>
 }

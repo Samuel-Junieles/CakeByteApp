@@ -17,11 +17,17 @@ class UsersViewModel @Inject constructor(
     private val _searchQuery = MutableStateFlow("")
     private val _selectedRole = MutableStateFlow("Todos")
 
-    // Ejemplo de flujo de datos combinando búsqueda y filtros
-    // En un entorno real, esto vendría del AuthRepository que observa la DB
-    val users: StateFlow<List<UserEntity>> = combine(_searchQuery, _selectedRole) { query, role ->
-        // Simulación de filtrado (en real sería una query de Room)
-        emptyList<UserEntity>() // Aquí iría la lógica de filtrado
+    val users: StateFlow<List<UserEntity>> = combine(
+        authRepository.getAllUsers(),
+        _searchQuery,
+        _selectedRole
+    ) { allUsers, query, role ->
+        allUsers.filter { user ->
+            val matchesQuery = user.name.contains(query, ignoreCase = true) || 
+                             user.email.contains(query, ignoreCase = true)
+            val matchesRole = role == "Todos" || user.role.equals(role, ignoreCase = true)
+            matchesQuery && matchesRole
+        }
     }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     fun onSearchQueryChanged(query: String) {

@@ -20,4 +20,7 @@ interface AuthDao {
 
     @Query("SELECT * FROM users LIMIT 1") // Para el ejemplo, tomamos el primer usuario como sesión activa
     fun getCurrentUser(): Flow<UserEntity?>
+
+    @Query("SELECT * FROM users ORDER BY createdAt DESC")
+    fun getAllUsers(): Flow<List<UserEntity>>
 }
