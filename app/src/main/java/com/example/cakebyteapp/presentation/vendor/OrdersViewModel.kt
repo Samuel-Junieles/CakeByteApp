@@ -24,6 +24,19 @@ class OrdersViewModel @Inject constructor(
             }
         }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
+    init {
+        // Solo agregar si la lista está vacía
+        viewModelScope.launch {
+            orderRepository.getAllOrders().first().let { currentList ->
+                if (localOrdersEmpty(currentList)) {
+                    addSampleOrders()
+                }
+            }
+        }
+    }
+
+    private fun localOrdersEmpty(list: List<OrderEntity>): Boolean = list.isEmpty()
+
     fun onFilterChanged(filter: String) {
         _selectedFilter.value = filter
     }
@@ -40,7 +53,7 @@ class OrdersViewModel @Inject constructor(
         }
     }
 
-    fun addSampleOrders() {
+    private fun addSampleOrders() {
         viewModelScope.launch {
             orderRepository.insertOrder(OrderEntity(1042, "Juan P.", "Tarta fresas ×1 · Croissant ×2", 34000.0, "Pendiente"))
             orderRepository.insertOrder(OrderEntity(1038, "Ana M.", "Red velvet ×1", 18000.0, "Pendiente"))

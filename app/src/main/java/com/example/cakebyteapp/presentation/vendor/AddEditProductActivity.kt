@@ -1,9 +1,11 @@
 package com.example.cakebyteapp.presentation.vendor
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityAddEditProductBinding
 import com.example.cakebyteapp.presentation.admin.ProductsViewModel
+import com.example.cakebyteapp.presentation.auth.UserProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -20,6 +23,7 @@ class AddEditProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddEditProductBinding
     private val viewModel: ProductsViewModel by viewModels()
     private var productId: Int = 0
+    private var selectedImageName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +36,7 @@ class AddEditProductActivity : AppCompatActivity() {
         setupListeners()
         
         if (productId != 0) {
-            binding.tvTitle.text = getString(R.string.title_edit_product)
+            binding.tvTitle.text = "Editar Producto"
             loadProductData()
         }
     }
@@ -53,6 +57,8 @@ class AddEditProductActivity : AppCompatActivity() {
                         binding.etPrice.setText(it.price.toString())
                         binding.actvCategory.setText(it.category, false)
                         binding.etStock.setText(it.stock.toString())
+                        selectedImageName = it.imageUrl ?: ""
+                        updatePreviewImage(selectedImageName)
                     }
                 }
             }
@@ -60,13 +66,10 @@ class AddEditProductActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.btnBack.setOnClickListener { 
-            finish()
-            overridePendingTransition(0, 0)
-        }
-        binding.btnCancel.setOnClickListener { 
-            finish()
-            overridePendingTransition(0, 0)
+        binding.btnCancel.setOnClickListener { finish() }
+
+        binding.imagePickerCard.setOnClickListener {
+            showImagePickerDialog()
         }
 
         binding.btnSave.setOnClickListener {
@@ -88,12 +91,12 @@ class AddEditProductActivity : AppCompatActivity() {
                 price = price,
                 category = category,
                 stock = stock,
-                status = "Activo"
+                status = "Activo",
+                imageUrl = selectedImageName
             )
             
-            Toast.makeText(this, "Producto publicado con éxito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Producto guardado con éxito", Toast.LENGTH_SHORT).show()
             finish()
-            overridePendingTransition(0, 0)
         }
 
         binding.bottomNavigation.selectedItemId = R.id.navigation_vendor_home
@@ -101,11 +104,43 @@ class AddEditProductActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_vendor_home -> {
                     finish()
-                    overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.navigation_vendor_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java))
+                    finish()
                     true
                 }
                 else -> false
             }
+        }
+    }
+
+    private fun showImagePickerDialog() {
+        val images = arrayOf(
+            "Torta de Chocolate", "Torta de Vainilla", "Red Velvet", 
+            "Carrot Cake", "Cheesecake Mora", "Cheesecake Fresa", "Galletas"
+        )
+        val imageNames = arrayOf(
+            "torta_de_chocolate", "torta_de_vainilla", "red_velvet_torta", 
+            "carrot_torta", "cheesecake_de_mora", "cheesecake_de_fresa", "galletas_de_chocolate"
+        )
+
+        AlertDialog.Builder(this)
+            .setTitle("Seleccionar Imagen")
+            .setItems(images) { _, which ->
+                selectedImageName = imageNames[which]
+                updatePreviewImage(selectedImageName)
+            }
+            .show()
+    }
+
+    private fun updatePreviewImage(name: String) {
+        if (name.isEmpty()) return
+        val resId = resources.getIdentifier(name, "drawable", packageName)
+        if (resId != 0) {
+            binding.ivProductPreview.setImageResource(resId)
+            binding.ivProductPreview.scaleType = android.widget.ImageView.ScaleType.CENTER_CROP
         }
     }
 }

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.cakebyteapp.LoginActivity
 import com.example.cakebyteapp.R
-import com.example.cakebyteapp.databinding.ActivityVendorProfileBinding
+import com.example.cakebyteapp.databinding.ActivityVendedorProfileBinding
 import com.example.cakebyteapp.presentation.admin.AdminViewModel
 import com.example.cakebyteapp.domain.repository.AuthRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,15 +18,15 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class VendorProfileActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityVendorProfileBinding
-    private val viewModel: AdminViewModel by viewModels() // Reusamos logout
+    private lateinit var binding: ActivityVendedorProfileBinding
+    private val viewModel: AdminViewModel by viewModels()
     
     @Inject
     lateinit var authRepository: AuthRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityVendorProfileBinding.inflate(layoutInflater)
+        binding = ActivityVendedorProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupListeners()
@@ -50,13 +50,11 @@ class VendorProfileActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_vendor_home -> {
                     startActivity(Intent(this, VendorProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
                 R.id.navigation_vendor_orders -> {
                     startActivity(Intent(this, VendorOrdersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }

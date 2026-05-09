@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/title_success"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivCheck"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="32dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:tint="@color/text_green"
+        android:contentDescription="Check" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@id/btnBackHome"
+        app:layout_constraintTop_toBottomOf="@id/ivCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <include
+                android:id="@+id/rowStatus"
+                layout="@layout/item_receipt_row" />
+            <include
+                android:id="@+id/rowMerchant"
+                layout="@layout/item_receipt_row" />
+            <include
+                android:id="@+id/rowDate"
+                layout="@layout/item_receipt_row" />
+            <include
+                android:id="@+id/rowTime"
+                layout="@layout/item_receipt_row" />
+            <include
+                android:id="@+id/rowId"
+                layout="@layout/item_receipt_row" />
+            <include
+                android:id="@+id/rowCus"
+                layout="@layout/item_receipt_row" />
+            <include
+                android:id="@+id/rowConcept"
+                layout="@layout/item_receipt_row" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBackHome"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="24dp"
+        android:padding="16dp"
+        android:text="@string/btn_return_home"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemIconTint="@color/salmon_primary"
+        app:itemTextColor="@color/salmon_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/buyer_bottom_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

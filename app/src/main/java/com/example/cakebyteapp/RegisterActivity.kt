@@ -1,7 +1,6 @@
 package com.example.cakebyteapp
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +24,6 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupRoleSpinner()
         observeState()
 
         binding.tvGoToLogin.setOnClickListener { finish() }
@@ -34,16 +32,27 @@ class RegisterActivity : AppCompatActivity() {
             val name = binding.etFullName.text.toString()
             val email = binding.etEmail.text.toString()
             val pass = binding.etPassword.text.toString()
-            val role = binding.spinnerRole.selectedItem.toString()
+            val confirmPass = binding.etConfirmPassword.text.toString()
+            val termsAccepted = binding.cbTerms.isChecked
+            val defaultRole = "Comprador"
 
-            viewModel.register(email, pass, name, role)
+            if (name.isBlank() || email.isBlank() || pass.isBlank()) {
+                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (pass != confirmPass) {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!termsAccepted) {
+                Toast.makeText(this, "Debes aceptar los términos y condiciones", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            viewModel.register(email, pass, name, defaultRole)
         }
-    }
-
-    private fun setupRoleSpinner() {
-        val roles = listOf("Comprador", "Vendedor", "Admin")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, roles)
-        binding.spinnerRole.adapter = adapter
     }
 
     private fun observeState() {
@@ -53,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                     is RegisterState.Loading -> binding.btnSignup.isEnabled = false
                     is RegisterState.Success -> {
                         Toast.makeText(this@RegisterActivity, "¡Cuenta creada con éxito!", Toast.LENGTH_SHORT).show()
-                        finish() // Vuelve al login
+                        finish()
                     }
                     is RegisterState.Error -> {
                         binding.btnSignup.isEnabled = true

@@ -4,282 +4,227 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <!-- Top Bar -->
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@android:drawable/ic_menu_revert"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black"
-        android:contentDescription="Volver" />
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
         android:text="@string/title_add_product"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnBack" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="#EEEEEE"
-        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@id/divider">
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Image Picker -->
+            <!-- Image Picker Placeholder -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvImagePicker"
+                android:id="@+id/imagePickerCard"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="@color/search_bg"
-                app:strokeWidth="2dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:cardElevation="4dp"
+                app:strokeColor="@color/input_bg"
+                app:strokeWidth="2dp">
 
                 <ImageView
-                    android:id="@+id/ivProductImage"
+                    android:id="@+id/ivProductPreview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerInside"
+                    android:scaleType="center"
                     android:src="@android:drawable/ic_input_add"
-                    app:tint="@color/black" />
+                    app:tint="@color/black"
+                    android:contentDescription="Elegir imagen" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Name -->
             <TextView
-                android:id="@+id/tvNameLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_product_name"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvImagePicker" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilName"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                app:boxBackgroundColor="@color/search_bg"
+                app:boxBackgroundColor="@color/input_bg"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvNameLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_product_name"
-                    android:inputType="text"
-                    android:paddingVertical="12dp" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Description -->
             <TextView
-                android:id="@+id/tvDescLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_description"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilName" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilDesc"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                app:boxBackgroundColor="@color/search_bg"
+                app:boxBackgroundColor="@color/input_bg"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvDescLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDesc"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="120dp"
                     android:gravity="top"
                     android:hint="@string/hint_description"
-                    android:inputType="textMultiLine"
-                    android:minLines="4"
-                    android:paddingVertical="12dp" />
+                    android:inputType="textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Price -->
             <TextView
-                android:id="@+id/tvPriceLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_price"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilDesc" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPrice"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                app:boxBackgroundColor="@color/search_bg"
+                app:boxBackgroundColor="@color/input_bg"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:prefixText="$"
-                app:layout_constraintTop_toBottomOf="@id/tvPriceLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="0.00"
-                    android:inputType="numberDecimal"
-                    android:paddingVertical="12dp" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Category -->
             <TextView
-                android:id="@+id/tvCategoryLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_category"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilPrice" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilCategory"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                app:boxBackgroundColor="@color/search_bg"
+                app:boxBackgroundColor="@color/input_bg"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvCategoryLabel">
+                app:hintEnabled="false">
 
                 <AutoCompleteTextView
                     android:id="@+id/actvCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    android:paddingVertical="12dp"
                     android:text="Tartas"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Stock -->
             <TextView
-                android:id="@+id/tvStockLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_stock_available"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilCategory" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilStock"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                app:boxBackgroundColor="@color/search_bg"
+                app:boxBackgroundColor="@color/input_bg"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvStockLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etStock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Admin"
-                    android:inputType="number"
-                    android:paddingVertical="12dp" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilStock">
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCancel"
-                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/search_bg"
+                    android:backgroundTint="@color/chip_all_bg"
                     android:text="@string/btn_cancel"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -292,7 +237,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/search_bg"
+                    android:backgroundTint="@color/chip_all_bg"
                     android:text="@string/btn_publish"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -300,7 +245,7 @@
                     app:cornerRadius="24dp" />
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

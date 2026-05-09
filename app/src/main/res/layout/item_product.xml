@@ -4,32 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="12dp">
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivProduct"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_gallery"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+    android:paddingVertical="16dp">
 
     <TextView
         android:id="@+id/tvProductName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvProductInfo"
         app:layout_constraintEnd_toStartOf="@+id/tvStatusBadge"
-        app:layout_constraintStart_toEndOf="@id/ivProduct"
-        app:layout_constraintTop_toTopOf="@id/ivProduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Tarta de fresas" />
 
@@ -37,9 +25,9 @@
         android:id="@+id/tvProductInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/ivProduct"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvStatusBadge"
         app:layout_constraintStart_toStartOf="@id/tvProductName"
         app:layout_constraintTop_toBottomOf="@id/tvProductName"
@@ -49,24 +37,24 @@
         android:id="@+id/tvStatusBadge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/bg_badge_role"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="4dp"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:backgroundTint="@color/chip_active_bg"
-        tools:text="Activa"
+        tools:text="Activo"
         tools:textColor="@color/text_green" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:background="#EEEEEE"
-        app:layout_constraintTop_toBottomOf="@id/ivProduct" />
+        app:layout_constraintTop_toBottomOf="@id/tvProductInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

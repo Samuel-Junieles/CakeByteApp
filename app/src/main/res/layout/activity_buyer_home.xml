@@ -4,38 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".presentation.buyer.BuyerHomeActivity">
 
-    <!-- Top Bar -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        android:contentDescription="@string/back" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSearch"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        app:boxBackgroundColor="@color/search_bg"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         app:boxCornerRadiusBottomEnd="24dp"
         app:boxCornerRadiusBottomStart="24dp"
         app:boxCornerRadiusTopEnd="24dp"
         app:boxCornerRadiusTopStart="24dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:hintEnabled="false"
         app:startIconDrawable="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnCart"
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack">
 
@@ -43,56 +42,57 @@
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Buscar"
-            android:inputType="text"
+            android:hint="@string/search_hint"
             android:paddingVertical="8dp"
-            android:textColor="@color/black" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageButton
+        android:id="@+id/btnCart"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_search"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnBack"
+        app:tint="@color/black"
+        android:contentDescription="Carrito" />
+
     <TextView
-        android:id="@+id/tvMyProducts"
+        android:id="@+id/tvHomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="@string/title_my_products"
+        android:text="@string/choose_cake"
         android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilSearch" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/salmon_primary"
-        android:text="@string/btn_add"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:cornerRadius="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/tvMyProducts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvMyProducts" />
-
-    <!-- Categories -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabCategories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/tvMyProducts"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvHomeTitle"
         app:tabIndicatorColor="@color/salmon_primary"
         app:tabSelectedTextColor="@color/salmon_primary"
         app:tabTextColor="@color/text_secondary"
-        app:tabMode="scrollable">
+        app:tabMode="fixed">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter_all_v" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_beverages" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -110,16 +110,14 @@
             android:text="@string/filter_cookies" />
     </com.google.android.material.tabs.TabLayout>
 
-    <!-- Product Grid -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvVendorProducts"
+        android:id="@+id/rvProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="16dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/tabCategories"
-        tools:listitem="@layout/item_vendor_product" />
+        tools:listitem="@layout/item_vendedor_product" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -129,6 +127,6 @@
         app:itemIconTint="@color/salmon_primary"
         app:itemTextColor="@color/salmon_primary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/vendor_bottom_menu" />
+        app:menu="@menu/buyer_bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,40 +15,47 @@ class ProductsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
-    private val _selectedStatus = MutableStateFlow("Todos")
     private val _selectedCategory = MutableStateFlow("Todos")
+    private val _selectedStatus = MutableStateFlow("Todos")
 
     val products: StateFlow<List<ProductEntity>> = combine(
         productRepository.getAllProducts(),
         _searchQuery,
-        _selectedStatus,
-        _selectedCategory
-    ) { allProducts, query, status, category ->
+        _selectedCategory,
+        _selectedStatus
+    ) { allProducts, query, category, status ->
         allProducts.filter { product ->
             val matchesQuery = product.name.contains(query, ignoreCase = true)
-            val matchesStatus = status == "Todos" || product.status.equals(status, ignoreCase = true)
             val matchesCategory = category == "Todos" || product.category.equals(category, ignoreCase = true)
-            matchesQuery && matchesStatus && matchesCategory
+            val matchesStatus = status == "Todos" || product.status.equals(status, ignoreCase = true)
+            matchesQuery && matchesCategory && matchesStatus
         }
-    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    init {
+        // Cargar productos iniciales si la DB está vacía
+        viewModelScope.launch {
+            productRepository.getAllProducts().first().let { 
+                if (it.isEmpty()) {
+                    addSampleProducts()
+                }
+            }
+        }
+    }
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
-    }
-
-    fun onStatusFilterChanged(status: String) {
-        _selectedStatus.value = status
     }
 
     fun onCategoryFilterChanged(category: String) {
         _selectedCategory.value = category
     }
 
-    fun getProductById(productId: Int): Flow<ProductEntity?> {
-        return productRepository.getAllProducts().map { list ->
-            list.find { it.id == productId }
-        }
+    fun onStatusFilterChanged(status: String) {
+        _selectedStatus.value = status
     }
+
+    fun getProductById(id: Int): Flow<ProductEntity?> = productRepository.getProductById(id)
 
     fun saveProduct(
         id: Int = 0,
@@ -57,7 +64,8 @@ class ProductsViewModel @Inject constructor(
         price: Double,
         category: String,
         stock: Int,
-        status: String = "Activo"
+        status: String = "Activo",
+        imageUrl: String? = null
     ) {
         viewModelScope.launch {
             try {
@@ -68,26 +76,32 @@ class ProductsViewModel @Inject constructor(
                     price = price,
                     category = category,
                     stock = stock,
-                    status = status
+                    status = status,
+                    imageUrl = imageUrl
                 )
-                if (id == 0) {
-                    // Para insertar uno nuevo, aseguramos que el ID sea 0
-                    productRepository.insertProduct(product.copy(id = 0))
-                } else {
-                    productRepository.updateProduct(product)
-                }
-                android.util.Log.d("PRODUCT_DEBUG", "Producto guardado con éxito: $name")
+                productRepository.insertProduct(product)
             } catch (e: Exception) {
-                android.util.Log.e("PRODUCT_DEBUG", "Error al guardar producto: ${e.message}")
+                // Log error
             }
         }
     }
 
-    fun addSampleProducts() {
+    private fun addSampleProducts() {
         viewModelScope.launch {
-            productRepository.insertProduct(ProductEntity(name = "Tarta de fresas", price = 18000.0, stock = 5, status = "Activo", description = "Deliciosa tarta con fresas frescas y crema."))
-            productRepository.insertProduct(ProductEntity(name = "Chocobrownie", price = 12000.0, stock = 10, status = "Activo", description = "Brownie melcochudo con mucho chocolate."))
-            productRepository.insertProduct(ProductEntity(name = "Red velvet", price = 22000.0, stock = 3, status = "Activo", description = "Pastel terciopelo rojo con crema de queso."))
+            val samples = listOf(
+                ProductEntity(name = "Torta de Chocolate", description = "Deliciosa torta de cacao", price = 25000.0, category = "Pasteles", stock = 10, imageUrl = "torta_de_chocolate", status = "Activo"),
+                ProductEntity(name = "Torta de Vainilla", description = "Torta suave de vainilla", price = 22000.0, category = "Pasteles", stock = 8, imageUrl = "torta_de_vainilla", status = "Activo"),
+                ProductEntity(name = "Cheesecake Mora", description = "Base de galleta y mora", price = 18000.0, category = "Pasteles", stock = 5, imageUrl = "cheesecake_de_mora", status = "Activo"),
+                ProductEntity(name = "Galletas Chocolate", description = "Paquete x6 galletas", price = 5000.0, category = "Galletas", stock = 20, imageUrl = "galletas_de_chocolate", status = "Activo"),
+                ProductEntity(name = "Pan Artesanal", description = "Recién horneado", price = 3000.0, category = "Pan", stock = 15, imageUrl = "carrot_torta", status = "Activo")
+            )
+            samples.forEach { productRepository.insertProduct(it) }
+        }
+    }
+
+    fun deleteProduct(product: ProductEntity) {
+        viewModelScope.launch {
+            productRepository.deleteProduct(product)
         }
     }
 }

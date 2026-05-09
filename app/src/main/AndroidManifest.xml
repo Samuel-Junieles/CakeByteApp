@@ -21,7 +21,6 @@
             android:theme="@style/Theme.CakeByteApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -60,6 +59,30 @@
             android:exported="false" />
         <activity
             android:name=".presentation.vendor.VendorProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.buyer.ProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.buyer.BuyerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.buyer.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.buyer.CheckoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.buyer.PaymentSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.login.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.auth.UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.auth.EditProfileActivity"
             android:exported="false" />
     </application>
 

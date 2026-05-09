@@ -10,6 +10,9 @@ data class ProductEntity(
     val description: String = "",
     val category: String = "Pasteles",
     val price: Double,
+    val rating: Float = 0f,
+    val reviewCount: Int = 0,
+    val allergens: String = "",
     val stock: Int,
     val status: String, // "Activo" o "Suspendido"
     val imageUrl: String? = null,

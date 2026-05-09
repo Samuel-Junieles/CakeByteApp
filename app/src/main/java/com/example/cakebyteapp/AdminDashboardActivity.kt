@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.cakebyteapp.databinding.ActivityAdminDashboardBinding
 import com.example.cakebyteapp.presentation.admin.AdminReportsActivity
+import com.example.cakebyteapp.presentation.admin.AdminProductsActivity
+import com.example.cakebyteapp.presentation.admin.AdminUsersActivity
+import com.example.cakebyteapp.presentation.auth.UserProfileActivity
 import com.example.cakebyteapp.presentation.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,15 +25,8 @@ class AdminDashboardActivity : AppCompatActivity() {
         binding = ActivityAdminDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupListeners()
         setupBottomNavigation()
         observeViewModel()
-    }
-
-    private fun setupListeners() {
-        binding.btnLogout.setOnClickListener {
-            viewModel.logout()
-        }
     }
 
     private fun observeViewModel() {
@@ -47,31 +43,30 @@ class AdminDashboardActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
+        binding.bottomNavigation.selectedItemId = R.id.navigation_dashboard
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_dashboard -> {
-                    // Ya estamos aquí
-                    true
-                }
+                R.id.navigation_dashboard -> true
                 R.id.navigation_users -> {
-                    val intent = Intent(this, com.example.cakebyteapp.presentation.admin.AdminUsersActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminUsersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> {
-                    val intent = Intent(this, com.example.cakebyteapp.presentation.admin.AdminProductsActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_reports -> {
-                    val intent = Intent(this, AdminReportsActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminReportsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    finish()
                     overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.navigation_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     true
                 }
                 else -> false

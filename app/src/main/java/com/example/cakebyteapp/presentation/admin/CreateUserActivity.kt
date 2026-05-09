@@ -1,17 +1,14 @@
 package com.example.cakebyteapp.presentation.admin
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.cakebyteapp.AdminDashboardActivity
-import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityCreateUserBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -21,30 +18,24 @@ class CreateUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateUserBinding
     private val viewModel: CreateUserViewModel by viewModels()
-    private var isEditMode: Boolean = false
-    private var userEmail: String? = null
+    private var isEditMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityCreateUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        userEmail = intent.getStringExtra("USER_EMAIL")
-        isEditMode = userEmail != null
 
         setupDropdown()
         setupListeners()
         observeViewModel()
-
-        if (isEditMode) {
+        
+        val userEmail = intent.getStringExtra("USER_EMAIL")
+        if (userEmail != null) {
+            isEditMode = true
             binding.tvTitle.text = "Editar Usuario"
-            binding.tilEmail.isEnabled = false // No dejamos editar el correo por ahora
-            viewModel.loadUser(userEmail!!)
+            viewModel.loadUser(userEmail)
         }
     }
-
-
 
     private fun setupDropdown() {
         val roles = arrayOf("Admin", "Vendedor", "Comprador")
@@ -53,49 +44,38 @@ class CreateUserActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
+        binding.btnCancel.setOnClickListener { finish() }
+        
         binding.btnSave.setOnClickListener {
             val name = binding.etName.text.toString()
             val surname = binding.etSurname.text.toString()
             val email = binding.etEmail.text.toString()
             val phone = binding.etPhone.text.toString()
             val role = binding.actvRole.text.toString()
-
+            
             viewModel.saveUser(name, surname, email, phone, role, isEditMode)
-        }
-
-        binding.btnCancel.setOnClickListener {
-            finish()
-        }
-
-        binding.bottomNavigation.selectedItemId = R.id.navigation_users
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_users -> {
-                    // Volver a la lista de usuarios (que ya está debajo en el stack)
-                    finish()
-                    true
-                }
-                R.id.navigation_dashboard -> {
-                    startActivity(Intent(this, AdminDashboardActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.navigation_products -> {
-                    startActivity(Intent(this, AdminProductsActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.navigation_reports -> {
-                    startActivity(Intent(this, AdminReportsActivity::class.java))
-                    finish()
-                    true
-                }
-                else -> false
-            }
         }
     }
 
     private fun observeViewModel() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.userToEdit.collect { user ->
+                    user?.let {
+                        val names = it.name.split(" ")
+                        binding.etName.setText(names.firstOrNull() ?: "")
+                        binding.etSurname.setText(if (names.size > 1) names.drop(1).joinToString(" ") else "")
+                        binding.etEmail.setText(it.email)
+                        binding.etPhone.setText(it.phone)
+                        binding.actvRole.setText(it.role, false)
+                        
+                        // En edición no permitimos cambiar el correo (es el identificador)
+                        binding.etEmail.isEnabled = false
+                    }
+                }
+            }
+        }
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
@@ -108,7 +88,7 @@ class CreateUserActivity : AppCompatActivity() {
                             Toast.makeText(this@CreateUserActivity, state.message, Toast.LENGTH_LONG).show()
                         }
                         is CreateUserViewModel.CreateUserUiState.Success -> {
-                            Toast.makeText(this@CreateUserActivity, "Usuario creado con éxito", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@CreateUserActivity, "Operación exitosa", Toast.LENGTH_SHORT).show()
                         }
                         else -> {
                             binding.btnSave.isEnabled = true
@@ -120,23 +100,9 @@ class CreateUserActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userToEdit.collect { user ->
-                    user?.let {
-                        val names = it.name.split(" ")
-                        binding.etName.setText(names.firstOrNull() ?: "")
-                        binding.etSurname.setText(if (names.size > 1) names.last() else "")
-                        binding.etEmail.setText(it.email)
-                        binding.actvRole.setText(it.role, false)
-                    }
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.navigationEvent.collect { event ->
-                    when (event) {
-                        is CreateUserViewModel.CreateUserNavigationEvent.NavigateBack -> finish()
+                    if (event is CreateUserViewModel.CreateUserNavigationEvent.NavigateBack) {
+                        finish()
                     }
                 }
             }

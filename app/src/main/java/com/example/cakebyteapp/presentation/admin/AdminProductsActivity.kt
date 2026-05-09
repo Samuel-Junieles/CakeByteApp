@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cakebyteapp.AdminDashboardActivity
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityAdminProductsBinding
+import com.example.cakebyteapp.presentation.auth.UserProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,9 +32,6 @@ class AdminProductsActivity : AppCompatActivity() {
         setupRecyclerView()
         setupListeners()
         observeViewModel()
-
-        // Para pruebas iniciales, cargar datos de ejemplo si la lista está vacía
-        viewModel.addSampleProducts()
     }
 
     private fun setupRecyclerView() {
@@ -60,37 +58,35 @@ class AdminProductsActivity : AppCompatActivity() {
             viewModel.onStatusFilterChanged(status)
         }
 
+        binding.bottomNavigation.selectedItemId = R.id.navigation_products
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    val intent = Intent(this, AdminDashboardActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> {
-                    val intent = Intent(this, AdminUsersActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminUsersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> true
                 R.id.navigation_reports -> {
-                    val intent = Intent(this, AdminReportsActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminReportsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.navigation_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     true
                 }
                 else -> false
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.navigation_products
     }
 
     private fun observeViewModel() {

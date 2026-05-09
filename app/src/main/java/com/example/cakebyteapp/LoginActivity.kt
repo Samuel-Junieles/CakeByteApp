@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.tvForgotPassword.setOnClickListener {
-            // Lógica de recuperar contraseña
+            startActivity(Intent(this, com.example.cakebyteapp.presentation.login.ForgotPasswordActivity::class.java))
         }
     }
 
@@ -71,8 +71,13 @@ class LoginActivity : AppCompatActivity() {
                         } else if (state.role == "Vendedor") {
                             startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.vendor.VendorProductsActivity::class.java))
                             finish()
+                        } else if (state.role == "Comprador") {
+                            startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.buyer.BuyerHomeActivity::class.java))
+                            finish()
                         } else {
-                            // Navegar a otros dashboards según el rol (Comprador)
+                            // Caso por defecto
+                            startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.buyer.BuyerHomeActivity::class.java))
+                            finish()
                         }
                     }
                     is LoginState.Error -> {

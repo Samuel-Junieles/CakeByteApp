@@ -23,6 +23,9 @@ interface ProductDao {
     @Query("SELECT * FROM products ORDER BY createdAt DESC")
     fun getAllProducts(): Flow<List<ProductEntity>>
 
+    @Query("SELECT * FROM products WHERE id = :id LIMIT 1")
+    fun getProductById(id: Int): Flow<ProductEntity?>
+
     @Query("SELECT * FROM products WHERE name LIKE '%' || :query || '%' ORDER BY createdAt DESC")
     fun searchProducts(query: String): Flow<List<ProductEntity>>
 }

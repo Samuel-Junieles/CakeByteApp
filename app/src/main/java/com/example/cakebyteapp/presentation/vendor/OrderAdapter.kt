@@ -13,8 +13,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class OrderAdapter(
-    private val onComplete: (OrderEntity) -> Unit,
-    private val onDelete: (OrderEntity) -> Unit
+    private val onClick: (OrderEntity) -> Unit
 ) : ListAdapter<OrderEntity, OrderAdapter.OrderViewHolder>(OrderDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -29,7 +28,7 @@ class OrderAdapter(
     inner class OrderViewHolder(private val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(order: OrderEntity) {
             val context = binding.root.context
-            binding.tvOrderTitle.text = context.getString(R.string.label_order_id, order.id, order.customerName)
+            binding.tvOrderTitle.text = "#${order.id} · ${order.customerName}"
             binding.tvOrderDetails.text = order.itemsSummary
             
             val colombianLocale = Locale("es", "CO")
@@ -40,13 +39,14 @@ class OrderAdapter(
             if (order.status == "Pendiente") {
                 binding.tvStatusBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.percentage_red)
                 binding.tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.text_red))
+                binding.ivCheck.visibility = android.view.View.VISIBLE
             } else {
                 binding.tvStatusBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.percentage_green)
                 binding.tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.text_green))
+                binding.ivCheck.visibility = android.view.View.GONE
             }
 
-            binding.ivCheck.setOnClickListener { onComplete(order) }
-            binding.btnDelete.setOnClickListener { onDelete(order) }
+            binding.root.setOnClickListener { onClick(order) }
         }
     }
 

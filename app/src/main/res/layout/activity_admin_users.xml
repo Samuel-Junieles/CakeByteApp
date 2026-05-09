@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".presentation.admin.AdminUsersActivity">
 
     <TextView
@@ -94,10 +95,7 @@
         android:clipToPadding="false"
         android:paddingBottom="100dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@id/cgFilters"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="62dp"
-        tools:listitem="@layout/item_user" />
+        app:layout_constraintTop_toBottomOf="@id/cgFilters" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -117,8 +115,6 @@
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/salmon_primary"
         android:paddingHorizontal="24dp"
-        android:elevation="12dp"
-        android:translationZ="12dp"
         android:text="@string/btn_create_user"
         android:textAllCaps="false"
         android:textColor="@color/black"

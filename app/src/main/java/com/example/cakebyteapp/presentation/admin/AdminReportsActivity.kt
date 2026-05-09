@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cakebyteapp.AdminDashboardActivity
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityAdminReportsBinding
+import com.example.cakebyteapp.presentation.auth.UserProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,36 +23,34 @@ class AdminReportsActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
+        binding.bottomNavigation.selectedItemId = R.id.navigation_reports
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    val intent = Intent(this, AdminDashboardActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> {
-                    val intent = Intent(this, AdminUsersActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminUsersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> {
-                    val intent = Intent(this, AdminProductsActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_reports -> true
+                R.id.navigation_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    true
+                }
                 else -> false
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.navigation_reports
     }
 }

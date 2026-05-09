@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Room
 import com.example.cakebyteapp.data.local.AppDatabase
 import com.example.cakebyteapp.data.local.dao.AuthDao
+import com.example.cakebyteapp.data.local.dao.CartDao
 import com.example.cakebyteapp.data.local.dao.OrderDao
 import com.example.cakebyteapp.data.local.dao.ProductDao
 import com.example.cakebyteapp.data.repository.AuthRepositoryImpl
+import com.example.cakebyteapp.data.repository.CartRepositoryImpl
 import com.example.cakebyteapp.data.repository.OrderRepositoryImpl
 import com.example.cakebyteapp.data.repository.ProductRepositoryImpl
 import com.example.cakebyteapp.domain.repository.AuthRepository
+import com.example.cakebyteapp.domain.repository.CartRepository
 import com.example.cakebyteapp.domain.repository.OrderRepository
 import com.example.cakebyteapp.domain.repository.ProductRepository
 import dagger.Module
@@ -55,19 +58,16 @@ object AppModule {
     }
 
     @Provides
-    fun provideAuthDao(db: AppDatabase): AuthDao {
-        return db.authDao()
-    }
+    fun provideAuthDao(db: AppDatabase): AuthDao = db.authDao()
 
     @Provides
-    fun provideProductDao(db: AppDatabase): ProductDao {
-        return db.productDao()
-    }
+    fun provideProductDao(db: AppDatabase): ProductDao = db.productDao()
 
     @Provides
-    fun provideOrderDao(db: AppDatabase): OrderDao {
-        return db.orderDao()
-    }
+    fun provideCartDao(db: AppDatabase): CartDao = db.cartDao()
+
+    @Provides
+    fun provideOrderDao(db: AppDatabase): OrderDao = db.orderDao()
 
     @Provides
     @Singleton
@@ -79,6 +79,12 @@ object AppModule {
     @Singleton
     fun provideProductRepository(productDao: ProductDao): ProductRepository {
         return ProductRepositoryImpl(productDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCartRepository(cartDao: CartDao): CartRepository {
+        return CartRepositoryImpl(cartDao)
     }
 
     @Provides

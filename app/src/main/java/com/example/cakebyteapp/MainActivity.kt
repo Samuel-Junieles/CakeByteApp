@@ -60,8 +60,12 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this@MainActivity, com.example.cakebyteapp.presentation.vendor.VendorProductsActivity::class.java)
                         startActivity(intent)
                     }
+                    is AuthUseCase.Destination.CompradorDashboard -> {
+                        val intent = Intent(this@MainActivity, com.example.cakebyteapp.presentation.buyer.BuyerHomeActivity::class.java)
+                        startActivity(intent)
+                    }
                     else -> {
-                        // Comprador u otros
+                        // Otros casos
                         startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
                     }
                 }

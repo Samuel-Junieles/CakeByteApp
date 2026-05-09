@@ -11,6 +11,8 @@ class ProductRepositoryImpl @Inject constructor(
 ) : ProductRepository {
     override fun getAllProducts(): Flow<List<ProductEntity>> = productDao.getAllProducts()
 
+    override fun getProductById(id: Int): Flow<ProductEntity?> = productDao.getProductById(id)
+
     override fun searchProducts(query: String): Flow<List<ProductEntity>> = productDao.searchProducts(query)
 
     override suspend fun insertProduct(product: ProductEntity) = productDao.insertProduct(product)

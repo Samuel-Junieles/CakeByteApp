@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".presentation.admin.CreateUserActivity">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
         android:text="@string/title_create_user"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,54 +24,36 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Avatar Section -->
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivAvatar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:padding="4dp"
-                android:src="@drawable/ic_launcher_foreground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-                app:strokeColor="@color/salmon_primary"
-                app:strokeWidth="2dp" />
+            <!-- Avatar placeholder from image -->
+            <ImageView
+                android:id="@+id/ivAvatarPlaceholder"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@android:drawable/ic_menu_edit"
+                app:tint="@color/icon_orange"
+                android:contentDescription="Avatar" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditPhoto"
-                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="0dp"
-                app:icon="@android:drawable/ic_menu_edit"
-                app:iconSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
-                app:layout_constraintEnd_toEndOf="@id/ivAvatar" />
-
-            <!-- Form Fields -->
+            <!-- Nombre -->
             <TextView
-                android:id="@+id/tvNameLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_name"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilName"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,31 +65,27 @@
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvNameLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_name"
-                    android:inputType="textPersonName"
-                    android:paddingVertical="12dp" />
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Apellido -->
             <TextView
-                android:id="@+id/tvSurnameLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_surname"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilName" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilSurname"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,31 +97,27 @@
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvSurnameLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSurname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_surname"
-                    android:inputType="textPersonName"
-                    android:paddingVertical="12dp" />
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Correo -->
             <TextView
-                android:id="@+id/tvEmailLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_email"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilSurname" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmail"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,31 +129,27 @@
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvEmailLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_email"
-                    android:inputType="textEmailAddress"
-                    android:paddingVertical="12dp" />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Telefono -->
             <TextView
-                android:id="@+id/tvPhoneLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/label_phone"
+                android:layout_marginStart="12dp"
+                android:text="@string/label_phone_admin"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilEmail" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPhone"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,31 +161,27 @@
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvPhoneLabel">
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_phone"
-                    android:inputType="phone"
-                    android:paddingVertical="12dp" />
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Rol -->
             <TextView
-                android:id="@+id/tvRoleLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/label_role"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilPhone" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilRole"
                 style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -226,15 +193,13 @@
                 app:boxCornerRadiusTopStart="24dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/tvRoleLabel">
+                app:hintEnabled="false">
 
                 <AutoCompleteTextView
                     android:id="@+id/actvRole"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    android:paddingVertical="12dp"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -243,19 +208,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilRole">
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCancel"
-                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/input_bg"
+                    android:backgroundTint="@color/chip_all_bg"
                     android:text="@string/btn_cancel"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -268,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/input_bg"
+                    android:backgroundTint="@color/chip_all_bg"
                     android:text="@string/btn_save"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -276,7 +238,7 @@
                     app:cornerRadius="24dp" />
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

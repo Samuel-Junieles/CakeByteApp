@@ -2,11 +2,9 @@ package com.example.cakebyteapp.presentation.admin
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.example.cakebyteapp.AdminDashboardActivity
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityAdminUsersBinding
+import com.example.cakebyteapp.presentation.auth.UserProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,6 @@ class AdminUsersActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityAdminUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -51,12 +49,10 @@ class AdminUsersActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        // Buscador
         binding.etSearch.addTextChangedListener { text ->
             viewModel.onSearchQueryChanged(text?.toString() ?: "")
         }
 
-        // Filtros de Rol
         binding.cgFilters.setOnCheckedStateChangeListener { _, checkedIds ->
             val role = when (checkedIds.firstOrNull()) {
                 R.id.chipAdmin -> "Admin"
@@ -66,43 +62,38 @@ class AdminUsersActivity : AppCompatActivity() {
             viewModel.onRoleFilterChanged(role)
         }
 
-        // Navegación Inferior
+        binding.bottomNavigation.selectedItemId = R.id.navigation_users
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    val intent = Intent(this, AdminDashboardActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> true
                 R.id.navigation_products -> {
-                    val intent = Intent(this, AdminProductsActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_reports -> {
-                    val intent = Intent(this, AdminReportsActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                    startActivity(Intent(this, AdminReportsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.navigation_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     true
                 }
                 else -> false
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.navigation_users
 
-        // Botón Crear Usuario
         binding.btnCreateUser.setOnClickListener {
-            val intent = Intent(this@AdminUsersActivity, CreateUserActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, CreateUserActivity::class.java))
         }
     }
 
