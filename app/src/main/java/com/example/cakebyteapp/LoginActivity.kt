@@ -68,8 +68,11 @@ class LoginActivity : AppCompatActivity() {
                         if (state.role == "Admin") {
                             startActivity(Intent(this@LoginActivity, AdminDashboardActivity::class.java))
                             finish()
+                        } else if (state.role == "Vendedor") {
+                            startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.vendor.VendorProductsActivity::class.java))
+                            finish()
                         } else {
-                            // Navegar a otros dashboards según el rol
+                            // Navegar a otros dashboards según el rol (Comprador)
                         }
                     }
                     is LoginState.Error -> {

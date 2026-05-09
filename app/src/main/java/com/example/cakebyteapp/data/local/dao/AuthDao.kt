@@ -23,4 +23,7 @@ interface AuthDao {
 
     @Query("SELECT * FROM users ORDER BY createdAt DESC")
     fun getAllUsers(): Flow<List<UserEntity>>
+
+    @Query("DELETE FROM users")
+    suspend fun clearAllUsers()
 }

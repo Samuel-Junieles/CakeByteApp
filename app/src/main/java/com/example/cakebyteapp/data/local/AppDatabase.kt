@@ -7,7 +7,7 @@ import com.example.cakebyteapp.data.local.dao.ProductDao
 import com.example.cakebyteapp.data.local.entity.ProductEntity
 import com.example.cakebyteapp.data.local.entity.UserEntity
 
-@Database(entities = [UserEntity::class, ProductEntity::class], version = 2, exportSchema = false)
+@Database(entities = [UserEntity::class, ProductEntity::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun authDao(): AuthDao
     abstract fun productDao(): ProductDao

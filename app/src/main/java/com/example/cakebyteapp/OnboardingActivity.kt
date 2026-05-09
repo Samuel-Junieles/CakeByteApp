@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cakebyteapp.databinding.ActivityOnboardingBinding
 import com.example.cakebyteapp.databinding.ItemOnboardingBinding
@@ -115,9 +115,12 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
             // Update indicators
-            holder.binding.indicator1.setBackgroundResource(if (position == 0) R.color.salmon_primary else R.color.indicator_inactive)
-            holder.binding.indicator2.setBackgroundResource(if (position == 1) R.color.salmon_primary else R.color.indicator_inactive)
-            holder.binding.indicator3.setBackgroundResource(if (position == 2) R.color.salmon_primary else R.color.indicator_inactive)
+            val activeColor = ContextCompat.getColor(holder.binding.root.context, R.color.salmon_primary)
+            val inactiveColor = ContextCompat.getColor(holder.binding.root.context, R.color.indicator_inactive)
+            
+            holder.binding.indicator1.setBackgroundColor(if (position == 0) activeColor else inactiveColor)
+            holder.binding.indicator2.setBackgroundColor(if (position == 1) activeColor else inactiveColor)
+            holder.binding.indicator3.setBackgroundColor(if (position == 2) activeColor else inactiveColor)
         }
 
         override fun getItemCount(): Int = items.size

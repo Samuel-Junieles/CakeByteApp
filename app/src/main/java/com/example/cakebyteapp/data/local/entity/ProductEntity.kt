@@ -7,9 +7,11 @@ import androidx.room.PrimaryKey
 data class ProductEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
+    val description: String = "",
+    val category: String = "Pasteles",
     val price: Double,
     val stock: Int,
-    val status: String, // "Activo" or "Suspendido"
+    val status: String, // "Activo" o "Suspendido"
     val imageUrl: String? = null,
     val createdAt: Long = System.currentTimeMillis()
 )

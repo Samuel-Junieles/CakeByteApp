@@ -49,6 +49,12 @@
         <activity
             android:name=".presentation.admin.AdminReportsActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.vendor.VendorProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.vendor.AddEditProductActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

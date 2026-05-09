@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.data.local.entity.ProductEntity
 import com.example.cakebyteapp.databinding.ItemProductBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 class ProductAdapter(
     private val onEdit: (ProductEntity) -> Unit
@@ -27,7 +29,11 @@ class ProductAdapter(
         fun bind(product: ProductEntity) {
             val context = binding.root.context
             binding.tvProductName.text = product.name
-            binding.tvProductInfo.text = context.getString(R.string.label_stock_info, product.price, product.stock)
+            
+            val colombianLocale = Locale("es", "CO")
+            val currencyFormatter = NumberFormat.getCurrencyInstance(colombianLocale)
+            val priceFormatted = currencyFormatter.format(product.price)
+            binding.tvProductInfo.text = context.getString(R.string.label_stock_info, priceFormatted, product.stock)
             
             // Estilo del badge según estado
             if (product.status == "Activo") {

@@ -18,13 +18,20 @@ class AuthRepositoryImpl @Inject constructor(
     
     override suspend fun login(email: String, pass: String): Result<UserEntity> {
         return try {
-            supabaseClient.auth.signInWith(Email) {
+            val session = supabaseClient.auth.signInWith(Email) {
                 this.email = email
                 this.password = pass
             }
-            // Obtenemos el usuario de la DB local o creamos uno temporal
-            val user = authDao.validateCredentials(email, pass) 
-                ?: UserEntity(email = email, password = pass, name = "Usuario Supabase", role = "Comprador")
+            
+            // Extraer metadata de Supabase (nombre y rol)
+            val metadata = supabaseClient.auth.currentUserOrNull()?.userMetadata
+            val name = metadata?.get("full_name")?.toString()?.replace("\"", "") ?: "Usuario"
+            val role = metadata?.get("role")?.toString()?.replace("\"", "") ?: "Comprador"
+            
+            // Guardar o actualizar en la DB local
+            val user = UserEntity(email = email, password = pass, name = name, role = role)
+            authDao.insertUser(user)
+
             Result.success(user)
         } catch (e: Exception) {
             Result.failure(e)
@@ -69,6 +76,7 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun logout(): Result<Unit> {
         return try {
             supabaseClient.auth.signOut()
+            authDao.clearAllUsers()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)

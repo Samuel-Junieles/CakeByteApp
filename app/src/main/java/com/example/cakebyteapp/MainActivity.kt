@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeDestination() {
         lifecycleScope.launch {
             viewModel.destination.collect { destination ->
+                android.util.Log.d("NAV_DEBUG", "Destino: $destination")
                 when (destination) {
                     is AuthUseCase.Destination.Login -> {
                         startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
@@ -55,8 +56,13 @@ class MainActivity : AppCompatActivity() {
                     is AuthUseCase.Destination.AdminDashboard -> {
                         startActivity(Intent(this@MainActivity, AdminDashboardActivity::class.java))
                     }
+                    is AuthUseCase.Destination.VendedorDashboard -> {
+                        val intent = Intent(this@MainActivity, com.example.cakebyteapp.presentation.vendor.VendorProductsActivity::class.java)
+                        startActivity(intent)
+                    }
                     else -> {
-                        // Navegar a otros dashboards según el rol
+                        // Comprador u otros
+                        startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
                     }
                 }
                 finish()
