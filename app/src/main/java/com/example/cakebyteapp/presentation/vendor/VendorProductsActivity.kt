@@ -21,7 +21,6 @@ class VendorProductsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVendorProductsBinding
     private val viewModel: ProductsViewModel by viewModels()
-    private val adminViewModel: AdminViewModel by viewModels() // Reusamos el logout del adminViewModel o crea uno VendorViewModel
     private lateinit var adapter: VendorProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,11 +67,15 @@ class VendorProductsActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_vendor_home -> true
                 R.id.navigation_vendor_orders -> {
-                    // Navegar a pedidos
+                    startActivity(Intent(this, VendorOrdersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    overridePendingTransition(0, 0)
+                    finish()
                     true
                 }
                 R.id.navigation_vendor_profile -> {
-                    adminViewModel.logout()
+                    startActivity(Intent(this, VendorProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    overridePendingTransition(0, 0)
+                    finish()
                     true
                 }
                 else -> false
@@ -96,16 +99,6 @@ class VendorProductsActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        lifecycleScope.launch {
-            adminViewModel.logoutSuccess.collect { success ->
-                if (success) {
-                    val intent = Intent(this@VendorProductsActivity, com.example.cakebyteapp.LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }
-            }
-        }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.products.collect { productList ->

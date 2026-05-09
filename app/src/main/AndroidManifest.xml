@@ -55,6 +55,12 @@
         <activity
             android:name=".presentation.vendor.AddEditProductActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.vendor.VendorOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.vendor.VendorProfileActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

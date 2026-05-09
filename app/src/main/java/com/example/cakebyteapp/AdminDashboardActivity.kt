@@ -57,21 +57,21 @@ class AdminDashboardActivity : AppCompatActivity() {
                     val intent = Intent(this, com.example.cakebyteapp.presentation.admin.AdminUsersActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> {
                     val intent = Intent(this, com.example.cakebyteapp.presentation.admin.AdminProductsActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_reports -> {
                     val intent = Intent(this, AdminReportsActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

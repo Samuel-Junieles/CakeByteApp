@@ -21,6 +21,8 @@ class CreateUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateUserBinding
     private val viewModel: CreateUserViewModel by viewModels()
+    private var isEditMode: Boolean = false
+    private var userEmail: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +30,18 @@ class CreateUserActivity : AppCompatActivity() {
         binding = ActivityCreateUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userEmail = intent.getStringExtra("USER_EMAIL")
+        isEditMode = userEmail != null
+
         setupDropdown()
         setupListeners()
         observeViewModel()
+
+        if (isEditMode) {
+            binding.tvTitle.text = "Editar Usuario"
+            binding.tilEmail.isEnabled = false // No dejamos editar el correo por ahora
+            viewModel.loadUser(userEmail!!)
+        }
     }
 
 
@@ -49,7 +60,7 @@ class CreateUserActivity : AppCompatActivity() {
             val phone = binding.etPhone.text.toString()
             val role = binding.actvRole.text.toString()
 
-            viewModel.saveUser(name, surname, email, phone, role)
+            viewModel.saveUser(name, surname, email, phone, role, isEditMode)
         }
 
         binding.btnCancel.setOnClickListener {
@@ -102,6 +113,20 @@ class CreateUserActivity : AppCompatActivity() {
                         else -> {
                             binding.btnSave.isEnabled = true
                         }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.userToEdit.collect { user ->
+                    user?.let {
+                        val names = it.name.split(" ")
+                        binding.etName.setText(names.firstOrNull() ?: "")
+                        binding.etSurname.setText(if (names.size > 1) names.last() else "")
+                        binding.etEmail.setText(it.email)
+                        binding.actvRole.setText(it.role, false)
                     }
                 }
             }

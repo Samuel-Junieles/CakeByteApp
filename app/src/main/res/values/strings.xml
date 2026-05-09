@@ -110,4 +110,21 @@
     <string name="label_category">Categoría</string>
     <string name="label_stock_available">Stock disponible</string>
     <string name="btn_publish">Publicar</string>
+
+    <!-- Vendor Orders -->
+    <string name="title_orders_v">Pedidos</string>
+    <string name="filter_pending">Pendientes</string>
+    <string name="filter_delivered">Entregado</string>
+    <string name="status_pending">Pendiente</string>
+    <string name="status_delivered">Entregado</string>
+    <string name="label_order_id">#%1$d · %2$s</string>
+
+    <!-- Vendor Profile -->
+    <string name="title_profile_v">Perfil</string>
+    <string name="label_total_sales">Ventas totales</string>
+    <string name="label_active_products">Productos activos</string>
+    <string name="menu_edit_profile">Editar Perfil</string>
+    <string name="menu_notifications">Notifications</string>
+    <string name="menu_logout">Cerrar Sesión</string>
+    <string name="label_on">ON</string>
 </resources>

@@ -73,6 +73,19 @@ class AuthRepositoryImpl @Inject constructor(
         return authDao.getAllUsers()
     }
 
+    override suspend fun getUserByEmail(email: String): UserEntity? {
+        return authDao.getUserByEmail(email)
+    }
+
+    override suspend fun updateUser(user: UserEntity): Result<Unit> {
+        return try {
+            authDao.insertUser(user)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     override suspend fun logout(): Result<Unit> {
         return try {
             supabaseClient.auth.signOut()

@@ -37,7 +37,11 @@ class AdminUsersActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = UserAdapter(
-            onEdit = { user -> Toast.makeText(this, "Editar: ${user.name}", Toast.LENGTH_SHORT).show() },
+            onEdit = { user -> 
+                val intent = Intent(this, CreateUserActivity::class.java)
+                intent.putExtra("USER_EMAIL", user.email)
+                startActivity(intent)
+            },
             onDelete = { user -> viewModel.deleteUser(user) }
         )
         binding.rvUsers.apply {
@@ -70,7 +74,7 @@ class AdminUsersActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> true
@@ -79,7 +83,7 @@ class AdminUsersActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_reports -> {
@@ -87,7 +91,7 @@ class AdminUsersActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

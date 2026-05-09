@@ -29,7 +29,7 @@ class AdminReportsActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> {
@@ -37,7 +37,7 @@ class AdminReportsActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
-
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> {
@@ -45,6 +45,7 @@ class AdminReportsActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_reports -> true
