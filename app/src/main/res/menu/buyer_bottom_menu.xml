@@ -5,6 +5,10 @@
         android:icon="@android:drawable/ic_menu_today"
         android:title="Inicio" />
     <item
+        android:id="@+id/navigation_catalog"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Catálogo" />
+    <item
         android:id="@+id/navigation_cart"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Carrito" />

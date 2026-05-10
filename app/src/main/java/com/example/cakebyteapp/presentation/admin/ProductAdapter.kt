@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.data.local.entity.ProductEntity
-import com.example.cakebyteapp.databinding.ItemProductBinding
+import com.example.cakebyteapp.databinding.ItemProductGridBinding
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -17,7 +17,7 @@ class ProductAdapter(
 ) : ListAdapter<ProductEntity, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemProductGridBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductViewHolder(binding)
     }
 
@@ -25,27 +25,41 @@ class ProductAdapter(
         holder.bind(getItem(position))
     }
 
-    inner class ProductViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ProductViewHolder(private val binding: ItemProductGridBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ProductEntity) {
-            val context = binding.root.context
-            binding.tvProductName.text = product.name
+            binding.tvProductName.text = product.safeName
             
             val colombianLocale = Locale("es", "CO")
             val currencyFormatter = NumberFormat.getCurrencyInstance(colombianLocale)
-            val priceFormatted = currencyFormatter.format(product.price)
-            binding.tvProductInfo.text = context.getString(R.string.label_stock_info, priceFormatted, product.stock)
-            
-            // Estilo del badge según estado
-            if (product.status == "Activo") {
-                binding.tvStatusBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.chip_active_bg)
-                binding.tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.text_green))
-                binding.tvStatusBadge.text = context.getString(R.string.status_active)
+            binding.tvProductPrice.text = currencyFormatter.format(product.safePrice)
+
+            val imageName = product.imageUrl ?: ""
+            val context = binding.root.context
+            val resId = if (imageName.isNotEmpty()) {
+                context.resources.getIdentifier(imageName, "drawable", context.packageName)
             } else {
-                binding.tvStatusBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.chip_suspended_bg)
-                binding.tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.text_red))
-                binding.tvStatusBadge.text = context.getString(R.string.status_suspended)
+                0
+            }
+            
+            if (resId != 0) {
+                binding.ivProduct.setImageResource(resId)
+            } else {
+                binding.ivProduct.setImageResource(R.drawable.torta_de_chocolate)
             }
 
+            // Logic for Stock Badge (Threshold: 1)
+            if (product.safeStock > 1) {
+                binding.tvStockBadge.text = context.getString(R.string.filter_in_stock)
+                binding.tvStockBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.percentage_green)
+                binding.tvStockBadge.setTextColor(ContextCompat.getColor(context, R.color.text_green))
+            } else {
+                binding.tvStockBadge.text = context.getString(R.string.filter_out_of_stock)
+                binding.tvStockBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.percentage_red)
+                binding.tvStockBadge.setTextColor(ContextCompat.getColor(context, R.color.text_red))
+            }
+
+            binding.btnAction.setImageResource(android.R.drawable.ic_menu_edit)
+            binding.btnAction.setOnClickListener { onEdit(product) }
             binding.root.setOnClickListener { onEdit(product) }
         }
     }

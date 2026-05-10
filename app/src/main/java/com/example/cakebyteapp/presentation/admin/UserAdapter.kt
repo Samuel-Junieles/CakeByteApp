@@ -28,23 +28,19 @@ class UserAdapter(
         fun bind(user: UserEntity) {
             binding.tvUserName.text = user.name
             binding.tvUserEmail.text = user.email
-            binding.tvUserRoleBadge.text = user.role
+            binding.tvUserRoleBadge.text = user.role.uppercase()
             
-            // Estilo del badge según rol
             val context = binding.root.context
             when (user.role) {
                 "Admin" -> {
-                    binding.tvUserRoleBadge.setBackgroundResource(R.drawable.bg_badge_role)
                     binding.tvUserRoleBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.chip_admin_bg)
                     binding.tvUserRoleBadge.setTextColor(ContextCompat.getColor(context, R.color.role_admin_text))
                 }
                 "Vendedor" -> {
-                    binding.tvUserRoleBadge.setBackgroundResource(R.drawable.bg_badge_role)
                     binding.tvUserRoleBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.chip_vendor_bg)
                     binding.tvUserRoleBadge.setTextColor(ContextCompat.getColor(context, R.color.role_vendor_text))
                 }
                 else -> {
-                    binding.tvUserRoleBadge.setBackgroundResource(R.drawable.bg_badge_role)
                     binding.tvUserRoleBadge.backgroundTintList = ContextCompat.getColorStateList(context, R.color.chip_all_bg)
                     binding.tvUserRoleBadge.setTextColor(ContextCompat.getColor(context, R.color.text_red))
                 }
@@ -56,7 +52,9 @@ class UserAdapter(
     }
 
     class UserDiffCallback : DiffUtil.ItemCallback<UserEntity>() {
-        override fun areItemsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean = oldItem == newItem
+        override fun areItemsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean = 
+            oldItem.email == newItem.email
+        override fun areContentsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean = 
+            oldItem == newItem
     }
 }

@@ -13,10 +13,6 @@
         android:icon="@android:drawable/ic_menu_manage"
         android:title="@string/nav_products" />
     <item
-        android:id="@+id/navigation_reports"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="@string/nav_reports" />
-    <item
         android:id="@+id/navigation_profile"
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="@string/nav_profile" />

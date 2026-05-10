@@ -6,17 +6,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.cakebyteapp.AdminDashboardActivity
+import com.example.cakebyteapp.VendorDashboardActivity
 import com.example.cakebyteapp.LoginActivity
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityUserProfileBinding
 import com.example.cakebyteapp.domain.repository.AuthRepository
 import com.example.cakebyteapp.presentation.admin.AdminProductsActivity
-import com.example.cakebyteapp.presentation.admin.AdminReportsActivity
 import com.example.cakebyteapp.presentation.admin.AdminUsersActivity
 import com.example.cakebyteapp.presentation.admin.AdminViewModel
 import com.example.cakebyteapp.presentation.buyer.BuyerHomeActivity
+import com.example.cakebyteapp.presentation.buyer.BuyerCatalogActivity
 import com.example.cakebyteapp.presentation.buyer.CartActivity
-import com.example.cakebyteapp.presentation.vendor.VendorOrdersActivity
 import com.example.cakebyteapp.presentation.vendor.VendorProductsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -100,11 +100,6 @@ class UserProfileActivity : AppCompatActivity() {
                             finish()
                             true
                         }
-                        R.id.navigation_reports -> {
-                            startActivity(Intent(this, AdminReportsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                            finish()
-                            true
-                        }
                         R.id.navigation_profile -> true
                         else -> false
                     }
@@ -112,20 +107,20 @@ class UserProfileActivity : AppCompatActivity() {
             }
             "Vendedor" -> {
                 binding.bottomNavigation.inflateMenu(R.menu.vendor_bottom_menu)
-                binding.bottomNavigation.selectedItemId = R.id.navigation_vendor_profile
+                binding.bottomNavigation.selectedItemId = R.id.navigation_profile
                 binding.bottomNavigation.setOnItemSelectedListener { item ->
                     when (item.itemId) {
-                        R.id.navigation_vendor_home -> {
+                        R.id.navigation_dashboard -> {
+                            startActivity(Intent(this, VendorDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                            finish()
+                            true
+                        }
+                        R.id.navigation_products -> {
                             startActivity(Intent(this, VendorProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
                             true
                         }
-                        R.id.navigation_vendor_orders -> {
-                            startActivity(Intent(this, VendorOrdersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                            finish()
-                            true
-                        }
-                        R.id.navigation_vendor_profile -> true
+                        R.id.navigation_profile -> true
                         else -> false
                     }
                 }
@@ -137,6 +132,11 @@ class UserProfileActivity : AppCompatActivity() {
                     when (item.itemId) {
                         R.id.navigation_home -> {
                             startActivity(Intent(this, BuyerHomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                            finish()
+                            true
+                        }
+                        R.id.navigation_catalog -> {
+                            startActivity(Intent(this, BuyerCatalogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
                             true
                         }

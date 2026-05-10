@@ -1,7 +1,6 @@
 package com.example.cakebyteapp.presentation.admin
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -19,6 +18,7 @@ class CreateUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateUserBinding
     private val viewModel: CreateUserViewModel by viewModels()
     private var isEditMode = false
+    private val roles = arrayOf("Admin", "Vendedor", "Comprador")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +34,12 @@ class CreateUserActivity : AppCompatActivity() {
             isEditMode = true
             binding.tvTitle.text = "Editar Usuario"
             viewModel.loadUser(userEmail)
+        } else {
+            binding.tvTitle.text = "Agregar nuevo usuario al sistema"
         }
     }
 
     private fun setupDropdown() {
-        val roles = arrayOf("Admin", "Vendedor", "Comprador")
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, roles)
         binding.actvRole.setAdapter(adapter)
     }
@@ -50,10 +51,20 @@ class CreateUserActivity : AppCompatActivity() {
             val name = binding.etName.text.toString()
             val surname = binding.etSurname.text.toString()
             val email = binding.etEmail.text.toString()
-            val phone = binding.etPhone.text.toString()
+            val password = binding.etPassword.text.toString()
             val role = binding.actvRole.text.toString()
             
-            viewModel.saveUser(name, surname, email, phone, role, isEditMode)
+            if (name.isBlank() || surname.isBlank() || email.isBlank() || role.isBlank()) {
+                Toast.makeText(this, "Por favor completa todos los campos obligatorios", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isEditMode && password.isBlank()) {
+                Toast.makeText(this, "La contraseña es obligatoria para nuevos usuarios", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            viewModel.saveUser(name, surname, email, password, role, isEditMode)
         }
     }
 
@@ -66,11 +77,14 @@ class CreateUserActivity : AppCompatActivity() {
                         binding.etName.setText(names.firstOrNull() ?: "")
                         binding.etSurname.setText(if (names.size > 1) names.drop(1).joinToString(" ") else "")
                         binding.etEmail.setText(it.email)
-                        binding.etPhone.setText(it.phone)
+                        
                         binding.actvRole.setText(it.role, false)
                         
                         // En edición no permitimos cambiar el correo (es el identificador)
                         binding.etEmail.isEnabled = false
+                        // En edición ocultamos o deshabilitamos el campo contraseña para este flujo simple
+                        binding.etPassword.setText("********")
+                        binding.etPassword.isEnabled = false
                     }
                 }
             }

@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(Intent(this@LoginActivity, AdminDashboardActivity::class.java))
                             finish()
                         } else if (state.role == "Vendedor") {
-                            startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.vendor.VendorProductsActivity::class.java))
+                            startActivity(Intent(this@LoginActivity, VendorDashboardActivity::class.java))
                             finish()
                         } else if (state.role == "Comprador") {
                             startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.buyer.BuyerHomeActivity::class.java))

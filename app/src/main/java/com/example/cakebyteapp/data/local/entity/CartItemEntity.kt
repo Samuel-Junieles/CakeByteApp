@@ -1,16 +1,22 @@
 package com.example.cakebyteapp.data.local.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@Entity(tableName = "cart_items")
+@Serializable
 data class CartItemEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val productId: Int,
+    val id: Long? = null,
+    @SerialName("productid")
+    val productId: Long,
+    @SerialName("productname")
     val productName: String,
+    @SerialName("productprice")
     val productPrice: Double,
     val quantity: Int,
     val size: String,
     val note: String? = null,
-    val imageUrl: String? = null
+    @SerialName("imageurl")
+    val imageUrl: String? = null,
+    @SerialName("user_email")
+    val userEmail: String? = null
 )

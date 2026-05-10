@@ -33,7 +33,7 @@ class CreateUserViewModel @Inject constructor(
         }
     }
 
-    fun saveUser(name: String, surname: String, email: String, phone: String, role: String, isEdit: Boolean = false) {
+    fun saveUser(name: String, surname: String, email: String, pass: String, role: String, isEdit: Boolean = false) {
         if (name.isBlank() || email.isBlank()) {
             _uiState.value = CreateUserUiState.Error("Nombre y Correo son obligatorios")
             return
@@ -43,18 +43,13 @@ class CreateUserViewModel @Inject constructor(
             _uiState.value = CreateUserUiState.Loading
             
             val result = if (isEdit) {
-                val currentUser = _userToEdit.value
-                if (currentUser != null) {
-                    authRepository.updateUser(currentUser.copy(
-                        name = "$name $surname",
-                        role = role
-                        // Note: email is used as PK/lookup, usually not changed here
-                    ))
-                } else {
-                    Result.failure(Exception("Usuario no encontrado"))
-                }
+                authRepository.updateUser(UserEntity(
+                    email = email,
+                    name = "$name $surname",
+                    role = role
+                ))
             } else {
-                authRepository.register(email, "password123", "$name $surname", role)
+                authRepository.register(email, pass, "$name $surname", role)
             }
 
             if (result.isSuccess) {

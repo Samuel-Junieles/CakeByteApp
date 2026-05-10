@@ -32,6 +32,11 @@ class CartActivity : AppCompatActivity() {
         observeViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
+    }
+
     private fun setupRecyclerView() {
         adapter = CartAdapter(
             onUpdateQuantity = { item, newQuantity -> viewModel.updateQuantity(item, newQuantity) },
@@ -44,14 +49,27 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
+        binding.btnCancel.setOnClickListener {
+            viewModel.clearCart()
+            finish()
+        }
+
         binding.btnCheckout.setOnClickListener {
-            startActivity(Intent(this, CheckoutActivity::class.java))
+            if (viewModel.cartItems.value.isNotEmpty()) {
+                startActivity(Intent(this, CheckoutActivity::class.java))
+            }
         }
 
         binding.bottomNavigation.selectedItemId = R.id.navigation_cart
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
+                    startActivity(Intent(this, BuyerHomeActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.navigation_catalog -> {
+                    startActivity(Intent(this, BuyerCatalogActivity::class.java))
                     finish()
                     true
                 }
@@ -79,7 +97,6 @@ class CartActivity : AppCompatActivity() {
                 viewModel.totalPrice.collect { total ->
                     val colombianLocale = Locale("es", "CO")
                     val currencyFormatter = NumberFormat.getCurrencyInstance(colombianLocale)
-                    binding.tvSubtotalPrice.text = currencyFormatter.format(total)
                     binding.tvTotalPrice.text = currencyFormatter.format(total)
                 }
             }

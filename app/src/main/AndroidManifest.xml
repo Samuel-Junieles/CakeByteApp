@@ -37,6 +37,9 @@
             android:name=".AdminDashboardActivity"
             android:exported="false" />
         <activity
+            android:name=".VendorDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.admin.AdminUsersActivity"
             android:exported="false" />
         <activity
@@ -65,6 +68,9 @@
             android:exported="false" />
         <activity
             android:name=".presentation.buyer.BuyerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.buyer.BuyerCatalogActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.buyer.CartActivity"

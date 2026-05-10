@@ -25,36 +25,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Atrás"
-                android:src="@android:drawable/ic_menu_revert"
+                android:contentDescription="Cerrar"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black" />
-
-            <ImageButton
-                android:id="@+id/btnFavorite"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Favorito"
-                android:src="@android:drawable/btn_star_big_off"
-                app:layout_constraintBottom_toBottomOf="@+id/btnBack"
-                app:layout_constraintEnd_toStartOf="@+id/btnCart"
-                app:layout_constraintTop_toTopOf="@+id/btnBack"
-                app:tint="@color/black" />
-
-            <ImageButton
-                android:id="@+id/btnCart"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Carrito"
-                android:src="@android:drawable/ic_menu_search"
-                app:layout_constraintBottom_toBottomOf="@+id/btnBack"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btnBack"
                 app:tint="@color/black" />
 
             <com.google.android.material.card.MaterialCardView
@@ -84,7 +58,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Chocolate Cake"
                 android:textColor="@color/black"
-                android:textSize="28sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/tvProductPrice"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,48 +69,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="$22"
+                android:text="$22.000"
                 android:textColor="@color/salmon_primary"
-                android:textSize="28sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/tvProductName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvProductName" />
-
-            <ImageView
-                android:id="@+id/ivStar"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="Estrella"
-                android:src="@android:drawable/btn_star_big_on"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvProductName"
-                app:tint="@color/rating_star" />
-
-            <TextView
-                android:id="@+id/tvRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="4.9 (102)"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ivStar"
-                app:layout_constraintStart_toEndOf="@id/ivStar"
-                app:layout_constraintTop_toTopOf="@+id/ivStar" />
-
-            <TextView
-                android:id="@+id/tvSeeReviews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/see_reviews"
-                android:textColor="@color/salmon_primary"
-                app:layout_constraintBottom_toBottomOf="@+id/tvRating"
-                app:layout_constraintStart_toEndOf="@id/tvRating"
-                app:layout_constraintTop_toTopOf="@+id/tvRating" />
 
             <TextView
                 android:id="@+id/tvDescription"
@@ -145,127 +84,35 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
                 android:lineSpacingExtra="4dp"
-                android:text="¡Disfruta de la pura delicia del cacao con nuestro delicioso pastel de chocolate! Capas jugosas de esponjoso bizcocho de chocolate con un delicioso glaseado de naranja."
+                android:text="¡Disfruta de la pura delicia del cacao!"
                 android:textColor="@color/text_secondary"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/tvSeeReviews" />
+                app:layout_constraintTop_toBottomOf="@id/tvProductName" />
 
-            <TextView
-                android:id="@+id/tvAllergensLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/allergens_label"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:textStyle="italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDescription" />
-
-            <TextView
-                android:id="@+id/tvAllergens"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="gluten, huevo, lácteos"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="@+id/tvAllergensLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvAllergensLabel"
-                app:layout_constraintTop_toTopOf="@+id/tvAllergensLabel" />
-
-            <LinearLayout
-                android:id="@+id/sizeGroup"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNote"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/tvAllergensLabel">
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:hintEnabled="true"
+                android:hint="Nota (opcional)"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSize16"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNote"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="16 cm"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:cornerRadius="16dp"
-                    app:strokeColor="@color/size_btn_border" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSize20"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/salmon_primary"
-                    android:text="20 cm"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:cornerRadius="16dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSize22"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="22 cm"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:cornerRadius="16dp"
-                    app:strokeColor="@color/size_btn_border" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSize24"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="24 cm"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:cornerRadius="16dp"
-                    app:strokeColor="@color/size_btn_border" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/ivEdit"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:contentDescription="Editar"
-                android:src="@android:drawable/ic_menu_edit"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sizeGroup"
-                app:tint="@color/text_secondary" />
-
-            <EditText
-                android:id="@+id/etNote"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="24dp"
-                android:background="@null"
-                android:hint="@string/note_hint"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:paddingBottom="24dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/ivEdit"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivEdit"
-                app:layout_constraintTop_toTopOf="@+id/ivEdit" />
+                    android:inputType="textMultiLine"
+                    android:minLines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -273,50 +120,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#FAFAFA"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingHorizontal="24dp"
+        android:paddingVertical="16dp"
         app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/tvTotalLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/total_price_label"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvTotalPrice"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tvTotalPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="$22.000"
-            android:textColor="@color/salmon_primary"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTotalLabel" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddToCart"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:backgroundTint="@color/salmon_primary"
-            android:paddingVertical="12dp"
-            android:text="@string/add_to_cart"
+            android:paddingVertical="14dp"
+            android:text="Añadir al carrito"
             android:textAllCaps="false"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:cornerRadius="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvTotalPrice"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

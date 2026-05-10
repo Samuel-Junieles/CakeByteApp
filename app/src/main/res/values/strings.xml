@@ -26,7 +26,7 @@
     <!-- Register -->
     <string name="register_title">Registrarse</string>
     <string name="or_sign_up_with">o regístrate con</string>
-    <string name="full_name_label">Nombre completo</string>
+    <string name="full_name_label">Nombre</string>
     <string name="full_name_hint">Juan</string>
     <string name="confirm_password_label">Confirmar contraseña</string>
     <string name="terms_and_privacy">Al crear una cuenta, acepto los Términos de Uso y la Política de Privacidad</string>
@@ -37,7 +37,7 @@
     <string name="dont_have_account">¿No tienes una cuenta? Regístrate</string>
     <string name="already_have_account">¿Ya tienes una cuenta? Inicia sesión</string>
     <string name="navigation_cart">Mi Carrito</string>
-    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_dashboard">Inicio</string>
     <string name="nav_users">Usuarios</string>
     <string name="nav_products">Productos</string>
     <string name="nav_reports">Reportes</string>
@@ -45,6 +45,7 @@
     <string name="nav_home">Inicio</string>
     <string name="nav_orders">Pedidos</string>
     <string name="welcome_user">¡Hola! 👋</string>
+    <string name="welcome_message">Bienvenido %1$s a CakeByte</string>
     <string name="choose_cake">Explorar Categorías</string>
     <string name="category_beverages">Bebidas</string>
     <string name="category_bread">Pan</string>
@@ -55,9 +56,11 @@
 
     <!-- Admin Dashboard -->
     <string name="dashboard_title">Dashboard</string>
-    <string name="ventas_hoy">Ventas Hoy</string>
+    <string name="ventas_dia">Ventas del día</string>
     <string name="pedidos">Pedidos</string>
+    <string name="ganancias_totales">Ganancias totales</string>
     <string name="total_sales">Ventas Totales</string>
+    <string name="label_total_sales">Ventas totales</string>
 
     <!-- Forgot Password -->
     <string name="title_forgot_password">Recuperar Contraseña</string>
@@ -157,7 +160,7 @@
     <string name="label_order_id">Pedido #%1$d · %2$s</string>
 
     <!-- Vendedor Stats -->
-    <string name="label_total_sales">Ventas totales</string>
+    <string name="label_total_sales_stat">Ventas totales</string>
     <string name="label_active_products">Productos activos</string>
 
     <!-- Checkout -->
@@ -196,4 +199,8 @@
     <string name="label_cus">CUS</string>
     <string name="label_concept">Concepto</string>
     <string name="btn_return_home">REGRESAR AL INICIO</string>
+
+    <!-- Stock Filters -->
+    <string name="filter_in_stock">En stock</string>
+    <string name="filter_out_of_stock">Fuera de stock</string>
 </resources>

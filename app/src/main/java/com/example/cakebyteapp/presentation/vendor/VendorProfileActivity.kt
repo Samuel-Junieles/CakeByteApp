@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.cakebyteapp.AdminDashboardActivity
 import com.example.cakebyteapp.LoginActivity
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityVendedorProfileBinding
 import com.example.cakebyteapp.presentation.admin.AdminViewModel
 import com.example.cakebyteapp.domain.repository.AuthRepository
+import com.example.cakebyteapp.presentation.admin.AdminProductsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -45,20 +47,20 @@ class VendorProfileActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.bottomNavigation.selectedItemId = R.id.navigation_vendor_profile
+        binding.bottomNavigation.selectedItemId = R.id.navigation_profile
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_vendor_home -> {
-                    startActivity(Intent(this, VendorProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                R.id.navigation_dashboard -> {
+                    startActivity(Intent(this, AdminDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     true
                 }
-                R.id.navigation_vendor_orders -> {
-                    startActivity(Intent(this, VendorOrdersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                R.id.navigation_products -> {
+                    startActivity(Intent(this, AdminProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     true
                 }
-                R.id.navigation_vendor_profile -> true
+                R.id.navigation_profile -> true
                 else -> false
             }
         }

@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetProductByIdUseCase @Inject constructor(
     private val repository: ProductRepository
 ) {
-    operator fun invoke(id: Int): Flow<ProductEntity?> = repository.getProductById(id)
+    operator fun invoke(id: Int): Flow<ProductEntity?> = repository.getProductById(id.toLong())
 }

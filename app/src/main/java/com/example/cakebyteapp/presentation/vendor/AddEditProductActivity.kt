@@ -1,6 +1,5 @@
 package com.example.cakebyteapp.presentation.vendor
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -22,7 +21,7 @@ class AddEditProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddEditProductBinding
     private val viewModel: ProductsViewModel by viewModels()
-    private var productId: Int = 0
+    private var productId: Long = 0L
     private var selectedImageName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,19 +29,21 @@ class AddEditProductActivity : AppCompatActivity() {
         binding = ActivityAddEditProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        productId = intent.getIntExtra("PRODUCT_ID", 0)
+        productId = intent.getLongExtra("PRODUCT_ID", 0L)
         
         setupDropdown()
         setupListeners()
+        observeViewModel()
         
-        if (productId != 0) {
+        if (productId != 0L) {
             binding.tvTitle.text = "Editar Producto"
+            binding.btnSave.text = "Guardar"
             loadProductData()
         }
     }
 
     private fun setupDropdown() {
-        val categories = arrayOf("Pan", "Pasteles", "Galletas", "Tartas")
+        val categories = arrayOf("Pan", "Pasteles", "Galletas", "Bebidas")
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
         binding.actvCategory.setAdapter(adapter)
     }
@@ -75,17 +76,20 @@ class AddEditProductActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             val name = binding.etName.text.toString()
             val desc = binding.etDesc.text.toString()
-            val price = binding.etPrice.text.toString().toDoubleOrNull() ?: 0.0
+            val priceText = binding.etPrice.text.toString()
+            val price = priceText.toDoubleOrNull() ?: 0.0
             val category = binding.actvCategory.text.toString()
-            val stock = binding.etStock.text.toString().toIntOrNull() ?: 0
+            val stockText = binding.etStock.text.toString()
 
-            if (name.isBlank() || price <= 0) {
+            val stock = stockText.toIntOrNull() ?: 0
+
+            if (name.isBlank() || priceText.isBlank()) {
                 Toast.makeText(this, "El nombre y el precio son obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             viewModel.saveProduct(
-                id = productId,
+                id = if (productId == 0L) null else productId,
                 name = name,
                 description = desc,
                 price = price,
@@ -94,24 +98,20 @@ class AddEditProductActivity : AppCompatActivity() {
                 status = "Activo",
                 imageUrl = selectedImageName
             )
-            
-            Toast.makeText(this, "Producto guardado con éxito", Toast.LENGTH_SHORT).show()
-            finish()
         }
+    }
 
-        binding.bottomNavigation.selectedItemId = R.id.navigation_vendor_home
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_vendor_home -> {
-                    finish()
-                    true
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.saveSuccess.collect { success ->
+                    if (success) {
+                        Toast.makeText(this@AddEditProductActivity, "Operación exitosa", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this@AddEditProductActivity, "Error al guardar cambios", Toast.LENGTH_SHORT).show()
+                    }
                 }
-                R.id.navigation_vendor_profile -> {
-                    startActivity(Intent(this, UserProfileActivity::class.java))
-                    finish()
-                    true
-                }
-                else -> false
             }
         }
     }

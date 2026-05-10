@@ -29,14 +29,15 @@ class RegisterActivity : AppCompatActivity() {
         binding.tvGoToLogin.setOnClickListener { finish() }
 
         binding.btnSignup.setOnClickListener {
-            val name = binding.etFullName.text.toString()
+            val nombres = binding.etFullName.text.toString()
+            val apellidos = binding.etSurname.text.toString()
             val email = binding.etEmail.text.toString()
             val pass = binding.etPassword.text.toString()
             val confirmPass = binding.etConfirmPassword.text.toString()
             val termsAccepted = binding.cbTerms.isChecked
             val defaultRole = "Comprador"
 
-            if (name.isBlank() || email.isBlank() || pass.isBlank()) {
+            if (nombres.isBlank() || apellidos.isBlank() || email.isBlank() || pass.isBlank()) {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -51,7 +52,8 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            viewModel.register(email, pass, name, defaultRole)
+            // Unimos nombres y apellidos para el registro actual que espera un string 'name'
+            viewModel.register(email, pass, "$nombres $apellidos", defaultRole)
         }
     }
 

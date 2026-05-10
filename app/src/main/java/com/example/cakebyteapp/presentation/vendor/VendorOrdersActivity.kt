@@ -9,8 +9,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cakebyteapp.AdminDashboardActivity
 import com.example.cakebyteapp.R
 import com.example.cakebyteapp.databinding.ActivityVendedorOrdersBinding
+import com.example.cakebyteapp.presentation.admin.AdminProductsActivity
 import com.example.cakebyteapp.presentation.auth.UserProfileActivity
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,16 +59,20 @@ class VendorOrdersActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.bottomNavigation.selectedItemId = R.id.navigation_vendor_orders
+        binding.bottomNavigation.selectedItemId = R.id.navigation_dashboard
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_vendor_home -> {
-                    startActivity(Intent(this, VendorProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                R.id.navigation_dashboard -> {
+                    startActivity(Intent(this, AdminDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     true
                 }
-                R.id.navigation_vendor_orders -> true
-                R.id.navigation_vendor_profile -> {
+                R.id.navigation_products -> {
+                    startActivity(Intent(this, AdminProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    finish()
+                    true
+                }
+                R.id.navigation_profile -> {
                     startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                     finish()
                     true

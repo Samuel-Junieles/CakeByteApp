@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:text="@string/title_users"
+        android:text="@string/title_my_products"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         app:boxCornerRadiusBottomEnd="24dp"
         app:boxCornerRadiusBottomStart="24dp"
         app:boxCornerRadiusTopEnd="24dp"
@@ -40,81 +40,88 @@
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_user_hint"
+            android:hint="Buscar producto"
             android:inputType="text"
             android:paddingVertical="10dp"
             android:textColor="@color/black"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <HorizontalScrollView
-        android:id="@+id/hsvFilters"
+    <!-- Categories Pasarela (TabLayout) -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabCategories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/tilSearch">
+        app:layout_constraintTop_toBottomOf="@id/tilSearch"
+        app:tabIndicatorColor="@color/salmon_primary"
+        app:tabSelectedTextColor="@color/salmon_primary"
+        app:tabTextColor="@color/text_secondary"
+        app:tabMode="fixed">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cgFilters"
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="24dp"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+            android:text="@string/filter_all_v" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAll"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/filter_all"
-                app:chipBackgroundColor="@color/chip_all_bg"
-                app:chipStrokeWidth="0dp" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_cakes" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAdmin"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/filter_admin"
-                app:chipBackgroundColor="@color/chip_admin_bg"
-                app:chipStrokeWidth="0dp" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_cookies" />
+    </com.google.android.material.tabs.TabLayout>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipVendor"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/filter_vendor"
-                app:chipBackgroundColor="@color/chip_vendor_bg"
-                app:chipStrokeWidth="0dp" />
+    <!-- Stock Chips -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgStockFilters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabCategories"
+        app:selectionRequired="false"
+        app:singleSelection="true">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipBuyer"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Comprador"
-                app:chipBackgroundColor="@color/search_bg"
-                app:chipStrokeWidth="0dp" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipInStock"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_in_stock"
+            android:textAlignment="center"
+            app:chipBackgroundColor="@color/chip_active_bg"
+            app:chipStrokeWidth="0dp" />
 
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipOutOfStock"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_out_of_stock"
+            android:textAlignment="center"
+            app:chipBackgroundColor="@color/chip_suspended_bg"
+            app:chipStrokeWidth="0dp" />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUsers"
+        android:id="@+id/rvVendorProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingHorizontal="12dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@id/hsvFilters"
-        tools:listitem="@layout/item_user" />
+        app:layout_constraintTop_toBottomOf="@id/cgStockFilters"
+        tools:listitem="@layout/item_product_grid" />
 
     <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddUser"
+        android:id="@+id/fabAddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -125,7 +132,7 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Crear usuario" />
+        android:contentDescription="Agregar producto" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -135,6 +142,6 @@
         app:itemIconTint="@color/salmon_primary"
         app:itemTextColor="@color/salmon_primary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/admin_bottom_menu" />
+        app:menu="@menu/vendor_bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

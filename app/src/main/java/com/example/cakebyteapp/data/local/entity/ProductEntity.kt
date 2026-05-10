@@ -1,20 +1,24 @@
 package com.example.cakebyteapp.data.local.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@Entity(tableName = "products")
+@Serializable
 data class ProductEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val name: String,
-    val description: String = "",
-    val category: String = "Pasteles",
-    val price: Double,
-    val rating: Float = 0f,
-    val reviewCount: Int = 0,
-    val allergens: String = "",
-    val stock: Int,
-    val status: String, // "Activo" o "Suspendido"
+    val id: Long? = null,
+    val name: String? = "",
+    val description: String? = "",
+    val category: String? = "Pasteles",
+    val price: Double? = 0.0,
+    val stock: Int? = 0,
+    val status: String? = "Activo",
+    @SerialName("imageurl")
     val imageUrl: String? = null,
-    val createdAt: Long = System.currentTimeMillis()
-)
+    @SerialName("createdat")
+    val createdAt: String? = null
+) {
+    // Helper properties to handle nulls safely in UI
+    val safeName: String get() = name ?: "Producto"
+    val safePrice: Double get() = price ?: 0.0
+    val safeStock: Int get() = stock ?: 0
+}

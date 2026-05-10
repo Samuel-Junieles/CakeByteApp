@@ -11,33 +11,37 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/title_success"
+        android:layout_marginTop="64dp"
+        android:text="Gracias por tu compra"
         android:textColor="@color/black"
-        android:textSize="28sp"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:paddingHorizontal="32dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Gracias por tu compra, Samuel Junieles" />
 
-    <ImageView
-        android:id="@+id/ivCheck"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        android:src="@android:drawable/checkbox_on_background"
+    <TextView
+        android:id="@+id/tvSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TRANSACCIÓN EXITOSA"
+        android:textColor="@color/text_green"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:tint="@color/text_green"
-        android:contentDescription="Check" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@id/btnBackHome"
-        app:layout_constraintTop_toBottomOf="@id/ivCheck">
+        app:layout_constraintTop_toBottomOf="@id/tvSubTitle">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,9 +65,6 @@
                 android:id="@+id/rowId"
                 layout="@layout/item_receipt_row" />
             <include
-                android:id="@+id/rowCus"
-                layout="@layout/item_receipt_row" />
-            <include
                 android:id="@+id/rowConcept"
                 layout="@layout/item_receipt_row" />
 
@@ -72,15 +73,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBackHome"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
+        android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/salmon_primary"
         android:padding="16dp"
         android:text="@string/btn_return_home"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
+        app:cornerRadius="24dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

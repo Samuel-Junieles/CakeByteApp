@@ -11,4 +11,5 @@ interface AuthRepository {
     fun getAllUsers(): Flow<List<UserEntity>>
     suspend fun getUserByEmail(email: String): UserEntity?
     suspend fun updateUser(user: UserEntity): Result<Unit>
+    suspend fun deleteUser(email: String): Result<Unit>
 }
