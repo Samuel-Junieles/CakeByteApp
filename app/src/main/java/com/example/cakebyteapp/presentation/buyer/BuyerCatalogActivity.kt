@@ -73,19 +73,28 @@ class BuyerCatalogActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    startActivity(Intent(this, BuyerHomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, BuyerHomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_catalog -> true
                 R.id.navigation_cart -> {
-                    startActivity(Intent(this, CartActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, CartActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, UserProfileActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

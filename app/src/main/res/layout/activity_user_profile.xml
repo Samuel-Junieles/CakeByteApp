@@ -256,6 +256,7 @@
         android:background="@color/white"
         app:itemIconTint="@color/salmon_primary"
         app:itemTextColor="@color/salmon_primary"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

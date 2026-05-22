@@ -27,23 +27,35 @@ class AdminReportsActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    startActivity(Intent(this, AdminDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, AdminDashboardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> {
-                    startActivity(Intent(this, AdminUsersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, AdminUsersActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> {
-                    startActivity(Intent(this, AdminProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, AdminProductsActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, UserProfileActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

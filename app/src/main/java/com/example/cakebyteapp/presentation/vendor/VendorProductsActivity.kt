@@ -65,13 +65,19 @@ class VendorProductsActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    startActivity(Intent(this, VendorDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, VendorDashboardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_products -> true
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, UserProfileActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

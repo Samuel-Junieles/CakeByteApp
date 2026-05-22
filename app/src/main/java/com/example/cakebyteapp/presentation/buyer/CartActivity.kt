@@ -64,18 +64,27 @@ class CartActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    startActivity(Intent(this, BuyerHomeActivity::class.java))
+                    val intent = Intent(this, BuyerHomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_catalog -> {
-                    startActivity(Intent(this, BuyerCatalogActivity::class.java))
+                    val intent = Intent(this, BuyerCatalogActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_cart -> true
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, com.example.cakebyteapp.presentation.auth.UserProfileActivity::class.java))
+                    val intent = Intent(this, com.example.cakebyteapp.presentation.auth.UserProfileActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

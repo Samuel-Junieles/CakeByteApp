@@ -58,7 +58,6 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun loginWithGoogle(idToken: String): Result<UserEntity> {
         return try {
-            // Combinamos IDToken con el proveedor Google para que Supabase sepa qué validar
             supabaseClient.auth.signInWith(IDToken) {
                 this.idToken = idToken
                 this.provider = Google

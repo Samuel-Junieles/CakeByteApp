@@ -116,20 +116,29 @@ class AdminProductsActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
                     val target = if (userRole == "Vendedor") VendorDashboardActivity::class.java else AdminDashboardActivity::class.java
-                    startActivity(Intent(this, target).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, target)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     finish()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_users -> {
                     if (userRole == "Admin") {
-                        startActivity(Intent(this, AdminUsersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                        val intent = Intent(this, AdminUsersActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                        startActivity(intent)
                         finish()
+                        overridePendingTransition(0, 0)
                     }
                     true
                 }
                 R.id.navigation_products -> true
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, UserProfileActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, UserProfileActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

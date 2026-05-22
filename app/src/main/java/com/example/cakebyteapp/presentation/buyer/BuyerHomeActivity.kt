@@ -43,15 +43,24 @@ class BuyerHomeActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_home -> true
                 R.id.navigation_catalog -> {
-                    startActivity(Intent(this, BuyerCatalogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    val intent = Intent(this, BuyerCatalogActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_cart -> {
-                    startActivity(Intent(this, CartActivity::class.java))
+                    val intent = Intent(this, CartActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, UserProfileActivity::class.java))
+                    val intent = Intent(this, UserProfileActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

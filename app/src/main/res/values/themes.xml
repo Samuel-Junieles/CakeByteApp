@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.CakeByteApp" parent="Base.Theme.CakeByteApp" />
+
+    <style name="Theme.CakeByteApp.NoAnimation" parent="Theme.CakeByteApp">
+        <item name="android:windowAnimationStyle">@style/WindowAnimation.NoAnimation</item>
+    </style>
+
+    <style name="WindowAnimation.NoAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+    </style>
 </resources>

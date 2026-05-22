@@ -35,46 +35,57 @@
             android:exported="false" />
         <activity
             android:name=".AdminDashboardActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".VendorDashboardActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.admin.AdminUsersActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.admin.CreateUserActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.admin.AdminProductsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.admin.AdminReportsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.vendor.VendorProductsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.vendor.AddEditProductActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.vendor.VendorOrdersActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.vendor.VendorProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.buyer.ProductDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.buyer.BuyerHomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.buyer.BuyerCatalogActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.buyer.CartActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.buyer.CheckoutActivity"
             android:exported="false" />
@@ -86,7 +97,8 @@
             android:exported="false" />
         <activity
             android:name=".presentation.auth.UserProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CakeByteApp.NoAnimation" />
         <activity
             android:name=".presentation.auth.EditProfileActivity"
             android:exported="false" />

@@ -88,16 +88,19 @@ class UserProfileActivity : AppCompatActivity() {
                         R.id.navigation_dashboard -> {
                             startActivity(Intent(this, AdminDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_users -> {
                             startActivity(Intent(this, AdminUsersActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_products -> {
                             startActivity(Intent(this, AdminProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_profile -> true
@@ -113,11 +116,13 @@ class UserProfileActivity : AppCompatActivity() {
                         R.id.navigation_dashboard -> {
                             startActivity(Intent(this, VendorDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_products -> {
                             startActivity(Intent(this, VendorProductsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_profile -> true
@@ -133,16 +138,19 @@ class UserProfileActivity : AppCompatActivity() {
                         R.id.navigation_home -> {
                             startActivity(Intent(this, BuyerHomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_catalog -> {
                             startActivity(Intent(this, BuyerCatalogActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_cart -> {
                             startActivity(Intent(this, CartActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                             finish()
+                            overridePendingTransition(0, 0)
                             true
                         }
                         R.id.navigation_profile -> true
