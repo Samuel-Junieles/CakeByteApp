@@ -30,7 +30,7 @@
                 android:layout_marginTop="160dp"
                 android:background="@color/white"
                 android:padding="8dp"
-                android:src="@drawable/logo_cake"
+                android:src="@drawable/logo_cake_byte_app_original"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
