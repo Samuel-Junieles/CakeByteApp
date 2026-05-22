@@ -21,6 +21,7 @@
     <string name="or_sign_in_with">o inicia sesión con</string>
     <string name="keep_me_signed_in">Mantenerme conectado</string>
     <string name="login_button">Ingresar</string>
+    <string name="login_google">Continuar con Google</string>
     <string name="btn_biometric_text">Acceder con huella</string>
 
     <!-- Register -->

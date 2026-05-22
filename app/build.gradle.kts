@@ -79,6 +79,11 @@ dependencies {
     implementation(libs.ktor.client.android)
     implementation(libs.kotlinx.serialization.json)
 
+    //Google
+    implementation(libs.google.id)
+    implementation(libs.credential.manager)
+    implementation(libs.credential.manager.play)
+
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)

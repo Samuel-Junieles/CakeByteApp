@@ -23,6 +23,8 @@ securityCrypto = "1.1.0-alpha06"
 supabase = "3.1.1"
 ktor = "3.0.3"
 kotlinxSerializationJson = "1.7.3"
+googleid = "1.1.1"
+credentialManager = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -69,6 +71,11 @@ supabase-postgrest = { group = "io.github.jan-tennert.supabase", name = "postgre
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
+# Google
+google-id = {module = "com.google.android.libraries.identity.googleid: googleid", version.ref = "googleid"}
+credential-manager = {module = "androidx.credentials: credentials", version.ref = "credentialManager"}
+credential-manager-play = {module = "androidx.credentials:credentials-play-services-auth", version.ref="credentialManager"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

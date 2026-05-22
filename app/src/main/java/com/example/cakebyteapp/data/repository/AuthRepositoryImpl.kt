@@ -5,7 +5,9 @@ import com.example.cakebyteapp.data.remote.dto.ProfileDto
 import com.example.cakebyteapp.domain.repository.AuthRepository
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.Google
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.auth.providers.builtin.IDToken
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -51,6 +53,57 @@ class AuthRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             Result.failure(e)
+        }
+    }
+
+    override suspend fun loginWithGoogle(idToken: String): Result<UserEntity> {
+        return try {
+            // Combinamos IDToken con el proveedor Google para que Supabase sepa qué validar
+            supabaseClient.auth.signInWith(IDToken) {
+                this.idToken = idToken
+                this.provider = Google
+            }
+            
+            val currentUser = supabaseClient.auth.currentUserOrNull() 
+                ?: return Result.failure(Exception("Error: No se pudo establecer la sesión en Supabase."))
+            
+            val email = currentUser.email ?: return Result.failure(Exception("Error: La cuenta de Google no proporcionó un correo."))
+            val userId = currentUser.id
+            
+            // 2. Buscar si el usuario ya existe en nuestra tabla 'usuarios'
+            val existingUser = getUserByEmail(email)
+            if (existingUser != null) {
+                return Result.success(existingUser)
+            }
+            
+            // 3. Si es nuevo, extraer datos del perfil de Google y crear registro en 'usuarios'
+            val metadata = currentUser.userMetadata
+            val fullName = metadata?.get("full_name")?.toString()?.trim()?.removeSurrounding("\"") ?: "Usuario Google"
+            val names = fullName.split(" ")
+            val firstName = names.getOrNull(0) ?: fullName
+            val lastName = if (names.size > 1) names.drop(1).joinToString(" ") else ""
+            
+            // Sincronizamos con la tabla 'usuarios' de la base de datos
+            withContext(Dispatchers.IO) {
+                try {
+                    supabaseClient.postgrest["usuarios"].insert(
+                        buildJsonObject {
+                            put("id", userId)
+                            put("nombres", firstName)
+                            put("apellidos", lastName)
+                            put("correo", email)
+                            put("contrasena", "google_oauth_${userId.takeLast(6)}")
+                            put("rol_id", 3)
+                        }
+                    )
+                } catch (e: Exception) {
+                    // Log error o manejar duplicados
+                }
+            }
+            
+            Result.success(UserEntity(email = email, name = fullName, role = "Comprador"))
+        } catch (e: Exception) {
+            Result.failure(Exception("Error Supabase Google: ${e.localizedMessage}"))
         }
     }
 

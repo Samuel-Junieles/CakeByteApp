@@ -8,6 +8,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.biometric.BiometricPrompt
+import androidx.credentials.CredentialManager
+import androidx.credentials.GetCredentialRequest
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.cakebyteapp.databinding.ActivityLoginBinding
@@ -43,6 +47,10 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(email, pass)
         }
 
+        binding.btnGoogle.setOnClickListener {
+            signInWithGoogle()
+        }
+
         binding.btnBiometric.setOnClickListener {
             showBiometricPrompt()
         }
@@ -75,7 +83,6 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.buyer.BuyerHomeActivity::class.java))
                             finish()
                         } else {
-                            // Caso por defecto
                             startActivity(Intent(this@LoginActivity, com.example.cakebyteapp.presentation.buyer.BuyerHomeActivity::class.java))
                             finish()
                         }
@@ -124,5 +131,40 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         biometricPrompt.authenticate(promptInfo)
+    }
+
+    private fun signInWithGoogle() {
+        val credentialManager = CredentialManager.create(this)
+
+        val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(false)
+            .setServerClientId("624129257670-97bu0r29hpasfuriqfautjqj655mo3kp.apps.googleusercontent.com")
+            .setAutoSelectEnabled(true)
+            .build()
+
+        val request = GetCredentialRequest.Builder()
+            .addCredentialOption(googleIdOption)
+            .build()
+
+        lifecycleScope.launch {
+            try {
+                val result = credentialManager.getCredential(
+                    context = this@LoginActivity,
+                    request = request
+                )
+                val credential = result.credential
+                
+                // Extraemos el ID Token de manera robusta
+                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+                    val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                    viewModel.loginWithGoogle(googleIdTokenCredential.idToken)
+                } else {
+                    Toast.makeText(this@LoginActivity, "Tipo de cuenta no soportado: ${credential.type}", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                // Captura errores como cancelación del usuario o problemas de red
+                Toast.makeText(this@LoginActivity, "Error al obtener cuenta: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

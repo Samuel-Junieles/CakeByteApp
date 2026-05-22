@@ -35,6 +35,18 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun loginWithGoogle(idToken: String) {
+        viewModelScope.launch {
+            _state.value = LoginState.Loading
+            val result = authRepository.loginWithGoogle(idToken)
+            result.onSuccess { user ->
+                _state.value = LoginState.Success(user.role)
+            }.onFailure { error ->
+                _state.value = LoginState.Error(error.message ?: "Error en Google Sign-In")
+            }
+        }
+    }
+
     fun loginWithBiometric() {
         val email = securityManager.getSavedEmail()
         val pass = securityManager.getSavedPass()
